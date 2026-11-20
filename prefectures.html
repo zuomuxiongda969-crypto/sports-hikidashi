@@ -83,6 +83,8 @@ button.star[aria-pressed="true"]{color:var(--shuttle)}
 .empty{color:var(--muted);padding:40px 0;text-align:center}
 footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px}
 footer .wrap{padding-block:20px 40px}
+.plink{color:var(--court);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+.plink:hover{color:var(--fg)}
 .more{margin-left:auto;font-size:12px;font-weight:700;color:var(--court);text-decoration:none;border:1.5px solid var(--court);border-radius:999px;padding:0 10px}
 .more:hover{background:var(--court);color:var(--court-ink)}
 #detail .wrap{padding-block:20px 60px}
@@ -496,7 +498,7 @@ function render(){
       });
       if(!shown.length)continue;
       total+=shown.length;
-      rh+=`<article class="pref"><div class="pref-head"><span class="code">${code}</span><span class="pname">${pname}</span>${DETAIL[code]?`<a class="more" href="#pref-${code}">15項目を見る</a>`:""}</div>`;
+      rh+=`<article class="pref"><div class="pref-head"><span class="code">${code}</span>${DETAIL[code]?`<a class="pname plink" href="#pref-${code}">${pname} <span aria-hidden="true">›</span></a>`:`<span class="pname">${pname}</span>`}</div>`;
       for(const it of shown){
         const id=code+":"+it.n;
         const q=encodeURIComponent(it.n+" "+pname);
