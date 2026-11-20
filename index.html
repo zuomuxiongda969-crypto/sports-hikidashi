@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="ja">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="スポーツの会社・施設・地域を調べて、確かめて、人と話すときに開ける引き出しを増やしていくノート。">
+<style>body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+<title>スポーツの引き出し</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: 1カラムの読み物。上部に帖の表紙(題字+一行説明)、記事一覧、記事本文はハッシュで切り替え */
+:root{
+  --bg:#f1f4f6; --paper:#ffffff; --ink:#18222b; --muted:#5e6b76; --rule:#d5dde3;
+  --navy:#1f3a5a; --feather:#2f7d6d; --draft:#b45309; --draft-bg:#fdf3e5; --memo-bg:#eef4f2;
+  --f-head:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho",serif;
+  --f-body:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#10161c; --paper:#171f27; --ink:#e3e9ee; --muted:#9aa8b4; --rule:#2b3742;
+  --navy:#9bbbe0; --feather:#6cc3ae; --draft:#f0a35a; --draft-bg:#2a2016; --memo-bg:#16262a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#10161c; --paper:#171f27; --ink:#e3e9ee; --muted:#9aa8b4; --rule:#2b3742;
+  --navy:#9bbbe0; --feather:#6cc3ae; --draft:#f0a35a; --draft-bg:#2a2016; --memo-bg:#16262a; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.85}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:var(--navy)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--feather);outline-offset:2px}
+.mast{border-bottom:1px solid var(--rule);background:var(--paper)}
+.mast .wrap{padding-block:28px 22px;display:flex;flex-wrap:wrap;align-items:flex-end;gap:8px 20px}
+.mast h1{font-family:var(--f-head);font-weight:800;font-size:clamp(28px,6vw,40px);line-height:1.2;margin:0;letter-spacing:.04em}
+.mast h1 a{color:var(--ink);text-decoration:none}
+.mast p{margin:0;color:var(--muted);font-size:14px;flex:1 1 260px}
+main .wrap{padding-block:28px 64px}
+.eyebrow{font-size:12px;letter-spacing:.14em;color:var(--muted);margin:0 0 8px}
+.about{background:var(--paper);border:1px solid var(--rule);border-radius:4px;padding:18px 20px;margin-bottom:28px}
+.about p{margin:0 0 6px}.about p:last-child{margin:0}
+.list{display:grid;gap:0;border-top:1px solid var(--rule)}
+.card{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;padding:18px 0;border-bottom:1px solid var(--rule);text-decoration:none;color:inherit}
+.card .no{font-family:var(--f-mono);font-size:13px;color:var(--muted);grid-row:span 3;padding-top:4px}
+.card h3{font-family:var(--f-head);font-weight:800;font-size:20px;margin:0;line-height:1.45;color:var(--ink);text-wrap:balance}
+.card:hover h3{color:var(--navy)}
+.card .sum{margin:0;color:var(--muted);font-size:14px}
+.meta{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:12px;color:var(--muted);align-items:center}
+.badge{font-size:11px;font-weight:700;padding:1px 8px;border-radius:999px;border:1px solid currentColor}
+.badge.draft{color:var(--draft)} .badge.pub{color:var(--feather)}
+.soon{padding:18px 0;color:var(--muted);font-size:14px;border-bottom:1px solid var(--rule)}
+article h2{font-family:var(--f-head);font-weight:800;font-size:clamp(24px,4.6vw,32px);line-height:1.4;margin:6px 0 12px;text-wrap:balance}
+article h3{font-family:var(--f-head);font-weight:800;font-size:21px;margin:36px 0 8px;padding-top:12px;border-top:1px solid var(--rule)}
+article h4{font-size:16px;margin:22px 0 4px}
+article p{margin:0 0 14px}
+article ul{margin:0 0 14px;padding-left:1.3em}
+.draftnote{background:var(--draft-bg);border:1px solid var(--draft);color:var(--ink);border-radius:4px;padding:12px 16px;font-size:14px;margin:12px 0 20px}
+.draftnote b{color:var(--draft)}
+.lede{font-size:17px}
+.facts{overflow-x:auto;margin:6px 0 16px}
+.facts table{border-collapse:collapse;width:100%;min-width:480px;font-size:14px}
+.facts th,.facts td{border-bottom:1px solid var(--rule);padding:8px 10px;text-align:left;vertical-align:top}
+.facts th{color:var(--muted);font-weight:500;white-space:nowrap}
+.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+sup a{font-family:var(--f-mono);font-size:11px;text-decoration:none}
+.memo{background:var(--memo-bg);border-left:3px solid var(--feather);padding:12px 16px;margin:10px 0 18px;font-size:15px}
+.memo .lbl{font-size:12px;letter-spacing:.1em;color:var(--feather);font-weight:700;display:block;margin-bottom:2px}
+.memo .ph{color:var(--muted)}
+.check{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;margin:0 0 16px;font-size:15px}
+.check .k{font-weight:700;white-space:nowrap}
+.sources{font-size:13px;color:var(--muted)}
+.sources ol{padding-left:1.6em}
+.sources li{margin-bottom:4px;word-break:break-all}
+.back{display:inline-block;margin-bottom:12px;font-size:14px}
+.sitenav{display:flex;gap:16px;width:100%;font-size:14px}
+.sitenav a{color:var(--muted);text-decoration:none}
+.sitenav a[aria-current="page"]{color:var(--navy);font-weight:700}
+.prefbox{display:block;border:1px solid var(--rule);background:var(--paper);border-radius:4px;padding:14px 18px;margin-bottom:28px;text-decoration:none;color:inherit}
+.prefbox b{font-family:var(--f-head);font-size:18px;display:block;color:var(--ink)}
+.prefbox span{font-size:14px;color:var(--muted)}
+.prefbox:hover b{color:var(--navy)}
+.talk{border:1px dashed var(--navy);border-radius:4px;padding:10px 14px;margin:10px 0 18px;font-size:15px}
+.talk .lbl{font-size:12px;letter-spacing:.1em;color:var(--navy);font-weight:700;display:block;margin-bottom:2px}
+.toc{font-size:14px;margin:0 0 18px;padding-left:1.4em;color:var(--muted)}
+footer{border-top:1px solid var(--rule);color:var(--muted);font-size:13px}
+footer .wrap{padding-block:18px 36px}
+</style>
+
+<header class="mast"><div class="wrap">
+  <h1><a href="#top">スポーツの引き出し</a></h1>
+  <p>スポーツの会社・施設・地域を調べて、確かめて、人と話すときに開ける引き出しを増やしていくノート。</p>
+  <nav class="sitenav" aria-label="サイト"><a href="#top" aria-current="page">記事</a><a href="prefectures.html#list">都道府県</a></nav>
+</div></header>
+
+<main><div class="wrap">
+
+<section id="home">
+  <div class="about">
+    <p class="eyebrow">このノートについて</p>
+    <p>スポーツの知識をつけ、見える範囲を広げるために、会社・施設・地域・仕事を1本ずつ調べて記事にしています。人と話すときにそのまま使える話題も、記事ごとに書き出しています。</p>
+    <p>事実には出典を付け、感想は自分の体験から書きます。都道府県ごとの情報は「都道府県」のページにまとめています。</p>
+  </div>
+  <a class="prefbox" href="prefectures.html#list"><b>都道府県の引き出し →</b><span>47都道府県の面白いスポーツ施設・会社の一覧。宮城はスポーツから食・旅・お土産まで15項目。</span></a>
+  <p class="eyebrow">記事</p>
+  <div class="list">
+    <a class="card" href="#about-me">
+      <span class="no">No.00</span>
+      <h3>はじめまして：このノートを書いている人</h3>
+      <p class="sum">バドミントンが好きで、スポーツを調べて話すのが好きな人の自己紹介。</p>
+      <div class="meta"><span>自己紹介</span></div>
+    </a>
+    <a class="card" href="#miyagi">
+      <span class="no">No.02</span>
+      <h3>宮城のスポーツをいま知る5つの話</h3>
+      <p class="sum">氷とバスケが同居するアリーナ、155万人が来る球場、バドミントン、体育大学、部活動の変化。</p>
+      <div class="meta"><span>2026年11月11日 調査</span><span>地域</span></div>
+    </a>
+    <a class="card" href="#yonex-gosen">
+      <span class="no">No.01</span>
+      <h3>バドミントン用品メーカーで働くとは：ヨネックスとゴーセン</h3>
+      <p class="sum">ラケットとガットを作る2社を、事業・工場・求人の3つの面から調べた。</p>
+      <div class="meta"><span>2026年11月11日 調査</span></div>
+    </a>
+    <div class="soon">次の記事の候補：SPLYZA（映像分析アプリ）／楽天野球団の事業部門／トナミ運輸バドミントン部</div>
+  </div>
+</section>
+
+<article id="about-me" hidden>
+  <a class="back" href="#top">← 記事一覧</a>
+  <p class="eyebrow">No.00　自己紹介</p>
+  <h2>はじめまして：このノートを書いている人</h2>
+  <div class="meta"></div>
+
+  <p class="lede">宮城に住んでいます。バドミントンが好きで、スポーツのことを調べて、人と話すのが好きです。</p>
+
+  <h3>バドミントンとのつきあい</h3>
+  <p>今も大会に出ています。プレーするのと同じくらい、用品の話をしたり、相談に乗ったりするのが好きです。新しいシャトルを試打してもらって、感想を聞く時間が特に楽しいです。</p>
+  <p>話せる分野は次の4つです。</p>
+  <ul>
+    <li>用品（ラケット、ガット、シャトル、シューズ）</li>
+    <li>試合や選手のこと</li>
+    <li>技術と、その教え方</li>
+    <li>大会やイベントの情報</li>
+  </ul>
+
+  <h3>分析して、言葉にするのが得意です</h3>
+  <p>プレーを見て「なぜそうなったか」を考え、わかりやすい言葉にするのが好きです。自分で、配球を記録して分析するツールや、スイングの動画からフォームを見るツールも作りました。</p>
+  <p>SNSでは約2,000人の方にフォローしてもらっています。トレーニング指導の資格（NSCA）の勉強もしています。</p>
+
+  <h3>このノートを始めた理由</h3>
+  <p>スポーツに関わる会社や施設、地域のことを、自分はまだ知らないと気づきました。知っていれば、大会や練習の場で人と話すときの話題が増えます。自分がどんな形でスポーツに関わっていけるかも、見えてくると考えました。</p>
+  <p>だから、1本ずつ調べて、確かめて、ここに残していきます。</p>
+
+  <h3>書き方の決まり</h3>
+  <ul>
+    <li>事実には出典を付けます。</li>
+    <li>感想は、自分の体験から書きます。</li>
+    <li>調べものにはAI（Claude）を使っています。内容は出典で確認してから載せます。</li>
+    <li>商品を紹介して報酬を受け取る場合は、その記事に「PR」と書きます。</li>
+  </ul>
+
+  <h3>話したい人</h3>
+  <p>スポーツに本気で取り組んでいる人、スポーツを支える仕事をしている人と話せたらうれしいです。用品の相談や、「この会社や施設を調べてほしい」というリクエストも歓迎です。</p>
+</article>
+
+<article id="miyagi" hidden>
+  <a class="back" href="#top">← 記事一覧</a>
+  <p class="eyebrow">No.02　地域</p>
+  <h2>宮城のスポーツをいま知る5つの話</h2>
+  <div class="meta"><span>2026年11月11日 調査</span><span>出典 8件</span></div>
+
+  <p class="lede">住んでいる県のスポーツを、どれだけ説明できるだろう。宮城には、ここ1〜2年で大きく変わったものと、昔から続く強みがある。今回は「知っていると会話が広がる」5つの話を選んだ。</p>
+  <ol class="toc">
+    <li>氷とバスケが同じ建物にあるアリーナ</li>
+    <li>1年で155万人が来る球場</li>
+    <li>宮城とバドミントン</li>
+    <li>スポーツを「支える人」を育てる大学</li>
+    <li>部活動が地域に移る</li>
+  </ol>
+
+  <h3>1. 氷とバスケが同じ建物にあるアリーナ</h3>
+  <p>長町のゼビオアリーナ仙台は、ゼビオホールディングスからの寄付で仙台市の施設になり、2025年7月5日にリニューアルオープンした。新しくスケートリンクができ、多目的アリーナと併用できる。市はこの組み合わせを「全国的にもほとんど例のない」施設と説明している<sup><a href="#m1">[1]</a></sup>。開館の日には、羽生結弦さんをはじめ仙台ゆかりのスケーターによるアイスショーが開かれた<sup><a href="#m1">[1]</a></sup>。</p>
+  <p>ここを本拠地にする仙台89ERSは、2026-27シーズンから新しいトップリーグ「Bリーグ・プレミア」で戦っている。9月26日の開幕戦もこのアリーナだった<sup><a href="#m2">[2]</a></sup>。</p>
+  <div class="talk"><span class="lbl">話のネタ</span>「長町のアリーナ、今はスケートリンクもあるの知ってる？　89ERSもBプレミアに上がったから、一度見に行きたい」</div>
+
+  <h3>2. 1年で155万人が来る球場</h3>
+  <p>楽天イーグルスの本拠地の観客数は、2024年に66試合で155万3,915人だった。2023年（69試合で129万2,028人）より試合数が少ないのに、20%ほど増えている<sup><a href="#m3">[3]</a></sup>。宮城県は毎年、この観客数をもとに球団が県にもたらす経済効果を計算している<sup><a href="#m3">[3]</a></sup>。</p>
+  <div class="talk"><span class="lbl">話のネタ</span>「楽天の球場、1試合あたり2万人以上来てるらしい。県が経済効果まで毎年出してるんだって」</div>
+
+  <h3>3. 宮城とバドミントン</h3>
+  <p>仙台市若林区の聖ウルスラ学院英智高校は、2019年のインターハイでバドミントン男子団体の優勝校になった<sup><a href="#m4">[4]</a></sup>。大きな大会の会場にもなっていて、2024年6月には全日本実業団バドミントン選手権大会がカメイアリーナ仙台と元気フィールド仙台で開かれた<sup><a href="#m5">[5]</a></sup>。</p>
+  <div class="talk"><span class="lbl">話のネタ</span>「宮城ってバドの全国大会がけっこう来るんですよ。2024年は実業団の日本一を決める大会が仙台だった」</div>
+
+  <h3>4. スポーツを「支える人」を育てる大学</h3>
+  <p>柴田町の仙台大学は体育学部の大学で、体育学科、健康福祉学科、スポーツ栄養学科、スポーツ情報マスメディア学科、現代武道学科、子ども運動栄養学科がある（2022年度の資料）<sup><a href="#m6">[6]</a></sup>。体育学科ではスポーツを「支える」人材の育成を掲げ、アスレティックトレーナーや、NSCAのCSCSなどの資格も目標として挙げている<sup><a href="#m6">[6]</a></sup>。大学の計画資料には、スポーツ科学と情報学を組み合わせた新しい学科の構想もあった。ただし、開設したかどうかは確認できていない<sup><a href="#m6">[6]</a></sup>。</p>
+  <div class="talk"><span class="lbl">話のネタ</span>「仙台大学ってスポーツの報道や情報を学ぶ学科まであるんですよ。宮城のトレーナーやコーチにはここの出身の人が多いかも」</div>
+
+  <h3>5. 部活動が地域に移る</h3>
+  <p>中学校の部活動を、学校の先生ではなく地域のクラブや指導者が担う動きが進んでいる。宮城県の審議会は、2026年度からの6年間を「改革実行期間」とし、「地域移行」の呼び方を「地域展開」に変えるよう提言した。休日だけでなく平日にも広げる方向だ<sup><a href="#m7">[7]</a></sup>。</p>
+  <p>一方で、県の人材バンクには2024年10月時点で指導者186件・団体24件の登録があったが、実際に学校とつながったのは2件だけだった<sup><a href="#m7">[7]</a></sup>。仙台市でも、少子化で団体競技のチームを組めない学校が増えていると報告されている<sup><a href="#m8">[8]</a></sup>。指導できる人と、教わりたい子どもをつなぐ仕組みがまだ足りていない。</p>
+  <div class="talk"><span class="lbl">話のネタ</span>「部活が地域に移る話、宮城だと指導者は186人も登録してるのに、つながったのは2件だけなんですって」</div>
+
+  <h3>調べてみて</h3>
+  <p>宮城は、トップの試合を見る場所（球場・アリーナ）、支える人を育てる場所（大学）、そして教える人が足りない現場（部活動）が、同じ県の中にそろっている。見る・学ぶ・教えるのどれから関わるかで、入口が変わる。</p>
+  <p>宮城の強豪校、有名人、グルメ、お酒などは<a href="prefectures.html#pref-04">都道府県の引き出し：宮城</a>に15項目でまとめている。</p>
+
+  <h3>出典</h3>
+  <div class="sources"><ol>
+    <li id="m1"><a href="https://www.city.sendai.jp/sesakukoho/gaiyo/shichoshitsu/kaiken/2025/05/27sendaishiarena1.html" target="_blank" rel="noopener">仙台市 市長記者会見（2025年5月27日）仙台市アリーナの開館記念イベント</a></li>
+    <li id="m2"><a href="https://baseballking.jp/ns/704994/" target="_blank" rel="noopener">「仙台89ERS」Bプレミア開幕に向けた壮行式を開催 — BASEBALL KING</a></li>
+    <li id="m3"><a href="https://www.pref.miyagi.jp/documents/24671/2024rakutenkeizai.pdf" target="_blank" rel="noopener">宮城県 楽天イーグルスの経済波及効果（2024年）</a></li>
+    <li id="m4"><a href="https://www.pref.miyagi.jp/documents/17521/755489.pdf" target="_blank" rel="noopener">宮城県 令和元年度全国高等学校総合体育大会の結果</a></li>
+    <li id="m5"><a href="https://actsaikyo-badminton.jp/wp/wp-content/uploads/2024/06/d272af851e8f303f7519a3fb905b8c23.pdf" target="_blank" rel="noopener">第74回全日本実業団バドミントン選手権大会 要項</a></li>
+    <li id="m6"><a href="https://www.sendaidaigaku.jp/" target="_blank" rel="noopener">仙台大学（入学式資料・事業計画資料）</a></li>
+    <li id="m7"><a href="https://www.pref.miyagi.jp/soshiki/sports/singikai251113.html" target="_blank" rel="noopener">宮城県 令和7年度第1回スポーツ推進審議会の結果</a></li>
+    <li id="m8"><a href="https://www.mext.go.jp/sports/content/20250731-spt_oripara-000028759_4.pdf" target="_blank" rel="noopener">スポーツ庁 部活動の地域展開 実証事業の報告（2025年7月）</a></li>
+  </ol>
+  <p>楽天イーグルスとベガルタ仙台・仙台89ERSの2025年の観客数は、今回は確認できなかった。仙台大学の学科は2022年度の資料のため、今の構成は公式サイトで確認する。</p></div>
+</article>
+
+<article id="yonex-gosen" hidden>
+  <a class="back" href="#top">← 記事一覧</a>
+  <p class="eyebrow">No.01　用品メーカー</p>
+  <h2>バドミントン用品メーカーで働くとは：ヨネックスとゴーセン</h2>
+  <div class="meta"><span>2026年11月11日 調査</span><span>出典 9件</span></div>
+
+  <p class="lede">試合で使うラケットもガットも、どこかの誰かが作っている。バドミントンが好きな人にとって、用品メーカーは一番身近な「コートの外の仕事」だ。今回はラケットのヨネックスと、ガットのゴーセンを調べた。</p>
+
+  <h3>ヨネックス：ラケットからゴルフ場まで</h3>
+  <p>ヨネックスは東京都文京区に本社を置くスポーツ用品メーカーで、バドミントン・テニス・ゴルフの用品を作って売っている。用品だけでなく、ゴルフ場やテニスクラブを運営する「スポーツ施設事業」も持っている<sup><a href="#s1">[1]</a></sup>。</p>
+  <div class="facts"><table>
+    <tr><th>本社</th><td>東京都文京区</td></tr>
+    <tr><th>売上高（連結）</th><td><span class="num">1,636</span>億円（2026年3月期、前期比18.3%増）</td></tr>
+    <tr><th>営業利益（連結）</th><td><span class="num">165</span>億円（同16.7%増）</td></tr>
+    <tr><th>従業員数</th><td>単体<span class="num">1,467</span>人／連結<span class="num">2,980</span>人</td></tr>
+    <tr><th>平均年齢・勤続</th><td><span class="num">38.7</span>歳・<span class="num">13.3</span>年</td></tr>
+    <tr><th>平均年間給与</th><td>約<span class="num">641</span>万円</td></tr>
+  </table></div>
+  <p>数字はすべて有価証券報告書（2026年3月期）から<sup><a href="#s1">[1]</a></sup>。売上も利益も2割近く伸びていて、平均勤続が13年あるので、長く働く人が多い会社だと読める。</p>
+
+  <h4>工場は新潟・埼玉、そして富山へ</h4>
+  <ul>
+    <li><b>新潟工場（長岡市）</b>：創業の地にある主力工場で、ラケットを作る。2016年にはラケット用の長岡第二工場が完成した<sup><a href="#s2">[2]</a></sup>。</li>
+    <li><b>東京工場（埼玉県）</b>：シャトルやストリングを作る工場として報告書に記載がある<sup><a href="#s1">[1]</a></sup>。</li>
+    <li><b>富山工場（立山町、2027年完成予定）</b>：バドミントンラケットとストリングの新工場。富山がバドミントンの盛んな地域であることも理由に挙げている<sup><a href="#s3">[3]</a></sup>。</li>
+  </ul>
+  <p>2026年7月の求人では、まず長岡の工場で1〜2年働き、その後に富山の新工場へ移る「立ち上げメンバー」を募集していた<sup><a href="#s4">[4]</a></sup>。新しい工場ができる時期は、採用が増えるタイミングでもある。</p>
+
+  <h4>どんな職種があるか</h4>
+  <p>求人サイトに出ていた中途採用の例は次のとおり<sup><a href="#s5">[5]</a></sup>。時期はばらばらで、今も募集しているとは限らない。</p>
+  <ul>
+    <li>バドミントン・テニスのウェアの商品企画・開発（未経験歓迎の募集あり）</li>
+    <li>海外トップ選手向けのウェア開発とサポート（選手の要望を指示書にまとめる）</li>
+    <li>東京・大阪の直営ショールームの販売員</li>
+    <li>貿易事務、法務、情報システム、経営企画</li>
+  </ul>
+
+  <h3>ゴーセン：「糸」ひとすじの会社</h3>
+  <p>ゴーセンは1951年創業の糸のメーカーで、主な事業は3つある<sup><a href="#s6">[6]</a></sup>。</p>
+  <ul>
+    <li>テニス・バドミントンのストリング（ガット）</li>
+    <li>釣り糸</li>
+    <li>自動車部材などの産業資材</li>
+  </ul>
+  <p>工場は兵庫県加東市にあり<sup><a href="#s7">[7]</a></sup>、大阪市にも拠点がある<sup><a href="#s8">[8]</a></sup>。2006年からは、繊維大手の日本毛織（ニッケ）のグループ会社になっている<sup><a href="#s9">[9]</a></sup>。</p>
+  <p>ガットと釣り糸は、細くて強い糸をつくる同じ技術から生まれている。バドミントンの用品が、まったく違う分野とつながっているのが面白い。</p>
+
+  <h3>2社を比べると</h3>
+  <div class="facts"><table>
+    <tr><th></th><th>ヨネックス</th><th>ゴーセン</th></tr>
+    <tr><th>主な製品</th><td>ラケット、シャトル、ガット、シューズ、ウェア</td><td>ガット、釣り糸、産業資材</td></tr>
+    <tr><th>規模</th><td>単体1,467人の上場企業</td><td>ニッケグループの専門メーカー</td></tr>
+    <tr><th>拠点</th><td>東京本社、新潟・埼玉の工場、富山に新工場</td><td>兵庫の工場、大阪の拠点</td></tr>
+    <tr><th>入口になりそうな仕事</th><td>商品企画、選手サポート、ショールーム、工場</td><td>今回は求人を確認できず</td></tr>
+  </table></div>
+
+  <h3>働く場所として、自分の物差しで見ると</h3>
+  <p>自分が仕事に求める条件で、今わかる範囲を整理した。○は合いそう、？は求人ごとに確認が必要なもの。</p>
+  <div class="check">
+    <span class="k">？ 平日夜・休み</span><span>職種によって違う。工場は交代勤務の可能性、ショールームは土日勤務の可能性がある。</span>
+    <span class="k">○ 信じられる商品</span><span>普段から使っている道具を作る会社で、紹介するときに迷いがない。</span>
+    <span class="k">○ スポーツの人がいる</span><span>選手サポートの部署があり、競技経験者が多いと考えられる。ただし未確認。</span>
+    <span class="k">？ 勤務地</span><span>仙台からは遠い。東京本社なら関東進出と重なる。</span>
+  </div>
+
+  <h3>出典</h3>
+  <div class="sources"><ol>
+    <li id="s1"><a href="https://edinetdb.jp/company/E02427/text" target="_blank" rel="noopener">ヨネックス 有価証券報告書テキスト（2026年3月期）— EDINET DB</a></li>
+    <li id="s2"><a href="https://www.yonex.co.jp/company/pr/pdf/16042702.pdf" target="_blank" rel="noopener">ヨネックス プレスリリース（2016年4月、長岡第二工場）</a></li>
+    <li id="s3"><a href="https://assets.minkabu.jp/news/article_media_content/urn:newsml:tdnet.info:20250303586661/140120250303586661.pdf" target="_blank" rel="noopener">ヨネックス 適時開示（2025年3月、富山県立山町の新工場）</a></li>
+    <li id="s4"><a href="https://careerconnection.jp/job/A0223015147770-detail" target="_blank" rel="noopener">求人情報（2026年7月掲載、富山工場立ち上げ）— キャリコネ</a></li>
+    <li id="s5"><a href="https://www.careercross.com/job/pdf-1598867" target="_blank" rel="noopener">ヨネックス 中途採用の求人例 — CareerCross</a></li>
+    <li id="s6"><a href="https://en.wikipedia.com/wiki/Gosen_(company)" target="_blank" rel="noopener">Gosen (company) — Wikipedia</a></li>
+    <li id="s7"><a href="https://www.city.kato.lg.jp/" target="_blank" rel="noopener">加東市の企業紹介資料（ゴーセン天神工場）</a></li>
+    <li id="s8"><a href="https://www.nikke.co.jp/admin/wp-content/uploads/2016/11/249150206.pdf" target="_blank" rel="noopener">ニッケグループ社内報（ゴーセン紹介）</a></li>
+    <li id="s9"><a href="https://edinetdb.jp/company/E00552/history" target="_blank" rel="noopener">日本毛織 沿革 — EDINET DB</a></li>
+  </ol>
+  <p>ゴーセンの公式サイトは今回の調査で開けなかったため、会社概要は他の資料から確認した。応募を考えるときは、各社の公式採用ページで最新の募集を確認する。</p></div>
+</article>
+
+</div></main>
+
+<footer><div class="wrap">スポーツの引き出し　調査：Claude（Sora）／文と体験：本人</div></footer>
+
+<script>
+function route(){
+  const h=location.hash.replace("#","");
+  const art=document.querySelectorAll("article");
+  let shown=false;
+  art.forEach(a=>{const on=a.id===h;a.hidden=!on;if(on)shown=true});
+  document.getElementById("home").hidden=shown;
+  if(shown||h==="top")window.scrollTo(0,0);
+}
+addEventListener("hashchange",route);route();
+</script>

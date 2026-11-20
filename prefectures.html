@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="ja">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>都道府県の引き出し</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: コートのライン図を思わせる帯ヘッダー → 絞り込みバー(sticky) → 地方ごとの県カード格子 */
+:root{
+  --bg:#f3f6f4; --surface:#ffffff; --fg:#14231d; --muted:#5b6d65; --line:#d3ddd8;
+  --court:#13664f; --court-ink:#ffffff; --shuttle:#e8a317;
+  --t-work:#13664f; --t-opt:#3d63b8; --t-sns:#c2410c; --t-bad:#8a5a00;
+  --chip-bg:#e6eeea;
+  --f-display:"Dela Gothic One","Hiragino Sans","Noto Sans JP",sans-serif;
+  --f-body:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0e1714; --surface:#16221d; --fg:#e4ede8; --muted:#94a89e; --line:#2a3a33;
+  --court:#1d7a5f; --court-ink:#f1fbf6; --shuttle:#f0b534;
+  --t-work:#4fc49b; --t-opt:#8aa8ef; --t-sns:#f08a5d; --t-bad:#e0b252;
+  --chip-bg:#1f2e28; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e1714; --surface:#16221d; --fg:#e4ede8; --muted:#94a89e; --line:#2a3a33;
+  --court:#1d7a5f; --court-ink:#f1fbf6; --shuttle:#f0b534;
+  --t-work:#4fc49b; --t-opt:#8aa8ef; --t-sns:#f08a5d; --t-bad:#e0b252;
+  --chip-bg:#1f2e28; color-scheme:dark}
+*{box-sizing:border-box}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.7}
+img{max-width:100%} [hidden]{display:none!important}
+.site{background:var(--surface);border-bottom:1px solid var(--line)}
+.site .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px;padding-block:10px}
+.site .home{font-weight:700;color:var(--fg);text-decoration:none;font-size:15px}
+.site nav{display:flex;gap:14px;font-size:14px}
+.site nav a{color:var(--muted);text-decoration:none}
+.site nav a[aria-current="page"]{color:var(--court);font-weight:700}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.hero{background:var(--court);color:var(--court-ink);position:relative;overflow:hidden}
+header.hero .wrap{padding-block:36px 30px;position:relative}
+header.hero svg{position:absolute;right:-40px;top:-10px;width:420px;max-width:70%;opacity:.22;pointer-events:none}
+h1{font-family:var(--f-display);font-weight:400;font-size:clamp(28px,5vw,46px);line-height:1.2;margin:0 0 10px;text-wrap:balance}
+.lead{max-width:62ch;margin:0;opacity:.92}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:16px;font-size:13px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;border:1.5px solid var(--court-ink)}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding-block:10px}
+.bar .lbl{font-size:12px;color:var(--muted);letter-spacing:.08em;margin-right:4px}
+button.chip{font:inherit;font-size:13px;border:1.5px solid var(--line);background:var(--surface);color:var(--fg);padding:4px 12px;border-radius:999px;cursor:pointer}
+button.chip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+button.chip:focus-visible,button.star:focus-visible,a:focus-visible{outline:2px solid var(--shuttle);outline-offset:2px}
+.count{margin-left:auto;font-family:var(--f-mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+main .wrap{padding-block:20px 60px}
+.region{margin-top:28px}
+.region h2{font-family:var(--f-display);font-weight:400;font-size:20px;margin:0 0 12px;display:flex;align-items:baseline;gap:10px}
+.region h2 small{font-family:var(--f-body);font-size:12px;color:var(--muted);letter-spacing:.06em}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+@media (max-width:420px){.grid{grid-template-columns:1fr}}
+.pref{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 16px 12px;min-width:0}
+.pref-head{display:flex;align-items:baseline;gap:8px;border-bottom:2px solid var(--court);padding-bottom:6px;margin-bottom:8px}
+.code{font-family:var(--f-mono);font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+.pname{font-weight:700;font-size:17px}
+.item{padding:8px 0;border-top:1px dashed var(--line)}
+.item:first-of-type{border-top:0}
+.item-top{display:flex;gap:8px;align-items:flex-start}
+.kind{flex:none;font-size:11px;font-weight:700;padding:1px 6px;border-radius:3px;background:var(--chip-bg);color:var(--muted);margin-top:3px}
+.iname{font-weight:700;flex:1;min-width:0}
+.iname a{color:inherit;text-decoration:none;border-bottom:1px solid var(--line)}
+.iname a:hover{border-color:var(--fg)}
+button.star{flex:none;background:none;border:0;cursor:pointer;font-size:18px;line-height:1;color:var(--line);padding:2px}
+button.star[aria-pressed="true"]{color:var(--shuttle)}
+.desc{margin:4px 0 0;font-size:14px}
+.note{margin:4px 0 0;font-size:13px;color:var(--muted)}
+.note b{font-weight:700}
+.note.w b{color:var(--t-work)} .note.s b{color:var(--t-sns)}
+.tags{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}
+.tag{font-size:11px;padding:0 7px;border-radius:999px;border:1px solid currentColor}
+.tag.work{color:var(--t-work)} .tag.opt{color:var(--t-opt)} .tag.sns{color:var(--t-sns)} .tag.bad{color:var(--t-bad)}
+.empty{color:var(--muted);padding:40px 0;text-align:center}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+footer .wrap{padding-block:20px 40px}
+.more{margin-left:auto;font-size:12px;font-weight:700;color:var(--court);text-decoration:none;border:1.5px solid var(--court);border-radius:999px;padding:0 10px}
+.more:hover{background:var(--court);color:var(--court-ink)}
+#detail .wrap{padding-block:20px 60px}
+.d-back{font-size:14px;color:var(--court)}
+.d-title{font-family:var(--f-display);font-weight:400;font-size:clamp(26px,5vw,38px);margin:8px 0 4px}
+.d-meta{font-size:13px;color:var(--muted);margin:0 0 18px}
+.d-jump{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px}
+.d-jump a{font-size:12px;text-decoration:none;color:var(--fg);background:var(--chip-bg);border-radius:999px;padding:2px 10px}
+.d-group{margin-top:30px}
+.d-group>h2{font-family:var(--f-display);font-weight:400;font-size:20px;margin:0 0 12px;padding-bottom:6px;border-bottom:2px solid var(--court)}
+.d-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px}
+@media (max-width:420px){.d-grid{grid-template-columns:1fr}}
+.d-cat{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px 16px;min-width:0;scroll-margin-top:70px}
+.d-cat h3{font-size:15px;margin:0 0 4px;color:var(--court)}
+.d-item{padding:8px 0;border-top:1px dashed var(--line)}
+.d-item:first-of-type{border-top:0}
+.d-item b{display:block}
+.d-item p{margin:2px 0 0;font-size:14px}
+.d-item .talk{font-size:13px;color:var(--t-sns)}
+.d-item .src{font-size:12px;color:var(--muted)}
+.d-item .src a{color:var(--muted)}
+.d-gap{font-size:13px;color:var(--muted);margin:6px 0 0}
+@media (prefers-reduced-motion:no-preference){button.star{transition:transform .15s}button.star:active{transform:scale(1.3)}}
+</style>
+
+<div class="site"><div class="wrap">
+  <a class="home" href="index.html">スポーツの引き出し</a>
+  <nav aria-label="サイト"><a href="index.html">記事</a><a href="prefectures.html#list" aria-current="page">都道府県</a></nav>
+</div></div>
+<header class="hero">
+  <div class="wrap">
+    <svg viewBox="0 0 400 220" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">
+      <rect x="10" y="10" width="380" height="200"/><line x1="200" y1="10" x2="200" y2="210"/>
+      <line x1="10" y1="25" x2="390" y2="25"/><line x1="10" y1="195" x2="390" y2="195"/>
+      <line x1="140" y1="10" x2="140" y2="210"/><line x1="260" y1="10" x2="260" y2="210"/>
+      <line x1="10" y1="110" x2="140" y2="110"/><line x1="260" y1="110" x2="390" y2="110"/>
+      <line x1="32" y1="10" x2="32" y2="210"/><line x1="368" y1="10" x2="368" y2="210"/>
+    </svg>
+    <h1>都道府県の引き出し</h1>
+    <p class="lead">各都道府県から「へえ」となるスポーツ施設と会社を選びました。転職の材料、自分の選択肢を広げる種、SNSのネタの3つの目で見られるよう、印を付けています。★で気になるものを残せます。</p>
+    <div class="legend">
+      <span><i class="dot" style="background:var(--t-work)"></i>仕事：働く場所として見る価値あり</span>
+      <span><i class="dot" style="background:var(--t-opt)"></i>選択肢：知っておくと視野が広がる</span>
+      <span><i class="dot" style="background:var(--t-sns)"></i>SNS：話のネタになる</span>
+      <span><i class="dot" style="background:var(--t-bad)"></i>バド：バドミントンに関係</span>
+    </div>
+  </div>
+</header>
+
+<div class="bar">
+  <div class="wrap" role="toolbar" aria-label="絞り込み">
+    <span class="lbl">絞り込み</span>
+    <button class="chip" id="f-all" data-f="all" aria-pressed="true">すべて</button>
+    <button class="chip" id="f-work" data-f="work" aria-pressed="false">仕事</button>
+    <button class="chip" id="f-opt" data-f="opt" aria-pressed="false">選択肢</button>
+    <button class="chip" id="f-sns" data-f="sns" aria-pressed="false">SNS</button>
+    <button class="chip" id="f-bad" data-f="bad" aria-pressed="false">バド</button>
+    <button class="chip" id="f-star" data-f="star" aria-pressed="false">★だけ</button>
+    <span class="count" id="count"></span>
+  </div>
+</div>
+
+<main><div class="wrap" id="list"></div></main>
+<section id="detail" hidden><div class="wrap" id="detail-body"></div></section>
+
+<footer><div class="wrap">
+  2026年11月時点の知識をもとにSoraが選定。名称・開業年・運営会社は変わることがあるため、気になったものは名前のリンク(Google検索)で最新情報を確認してください。採用情報は各社の公式サイトで確認する前提です。★はこの端末のブラウザにだけ保存されます。
+</div></footer>
+
+<script>
+const R = {
+ "北海道・東北":[
+  ["01","北海道",[
+   {k:"施設",n:"エスコンフィールドHOKKAIDO",d:"北広島市の開閉式屋根の球場。球場内に温泉・サウナがあり、試合を見ながら入れる。周辺のFビレッジは街づくりごと進行中。",w:"球場運営会社が街づくりまで担う珍しい形。イベント・施設運営の職種が多い。",s:"「風呂から野球観戦」は一発で伝わるネタ。",t:["work","sns"]},
+  ]],
+  ["02","青森",[
+   {k:"施設",n:"FLAT HACHINOHE（フラット八戸）",d:"八戸駅前の通年型アイスアリーナ。アイスホッケーの試合がない日は一般滑走やイベントに使われる、民間主導の施設。",w:"民間が建てて運営するアリーナの実例として、施設運営の働き方を知る材料になる。",t:["opt"]},
+  ]],
+  ["03","岩手",[
+   {k:"施設",n:"釜石鵜住居復興スタジアム",d:"東日本大震災で被災した小中学校の跡地に建てられ、2019年ラグビーW杯の会場になった。ラグビーのまち釜石の象徴。",s:"東北の人として語れる重みのある場所。",t:["opt","sns"]},
+   {k:"施設",n:"きたぎんボールパーク",d:"盛岡市に2023年開業した野球場。地方都市でもプロの試合を呼べる規模の球場をつくった例。",t:["opt"]},
+  ]],
+  ["04","宮城",[
+   {k:"施設",n:"ゼビオアリーナ仙台",d:"長町にある、つり下げ型の大型ビジョンを備えたアリーナ。仙台89ERSの試合やコンサートで使われる。",w:"仙台で働ける「アリーナ運営」の代表。イベント日は土日夜勤務になりやすい点は要確認。",t:["work"]},
+   {k:"会社",n:"楽天野球団（東北楽天ゴールデンイーグルス）",d:"球場をボールパーク化し、観覧車や遊具を外野側に置いた先駆け。チケット・ファンクラブ・データ活用の部署もある。",w:"球団の事業部門は平日日勤のポジションもある。仙台で応募できる大手スポーツ企業の筆頭。",s:"観覧車のある球場は全国でも珍しい。",t:["work","sns"]},
+  ]],
+  ["05","秋田",[
+   {k:"会社",n:"秋田ノーザンハピネッツ",d:"Bリーグの中でも熱狂的なブースターで知られるクラブ。地方都市×人口減の中で観客を集める工夫が多い。",w:"地方クラブの営業・運営・地域連携の仕事の実例。",t:["opt"]},
+  ]],
+  ["06","山形",[
+   {k:"会社",n:"モンテディオ山形",d:"J2クラブ。新スタジアム（天童）の構想を民間主導で進めている。地方でスタジアムをどう建てるかの事例。",t:["opt"]},
+   {k:"施設",n:"蔵王温泉スキー場",d:"樹氷で有名な老舗スキー場。インバウンド需要でスキー場運営の求人が増えている分野。",s:"樹氷の写真は季節ネタとして強い。",t:["opt","sns"]},
+  ]],
+  ["07","福島",[
+   {k:"施設",n:"Jヴィレッジ",d:"日本初のサッカーナショナルトレーニングセンター。原発事故の対応拠点として使われた後、2019年に全面再開。全天候型の練習場もある。",s:"「一度失われて戻ってきた施設」という物語がある。",t:["opt","sns"]},
+   {k:"会社",n:"ゼビオホールディングス",d:"郡山市が本社のスポーツ用品大手。用品店だけでなく、アリーナ運営やスポーツマーケティング会社もグループに持つ。",w:"東北本社の大手。用品×施設×マーケの3方向に入口がある。",t:["work"]},
+  ]],
+ ],
+ "関東":[
+  ["08","茨城",[
+   {k:"会社",n:"鹿島アントラーズ",d:"2019年からメルカリが経営するJ1クラブ。スタジアム内にスポーツクリニックがあり、地域の人も診てもらえる。",w:"IT企業が経営するクラブ。データ・デジタル系の職種が比較的多い。",t:["work","opt"]},
+  ]],
+  ["09","栃木",[
+   {k:"会社",n:"宇都宮ブレックス",d:"Bリーグ屈指の人気クラブ。宇都宮は自転車ロードレース「ジャパンカップ」と宇都宮ブリッツェンもあり、スポーツで街を売る都市。",t:["opt"]},
+   {k:"施設",n:"モビリティリゾートもてぎ",d:"サーキットに森の遊び場やホテルを組み合わせた複合施設。モータースポーツ以外の客を呼ぶ工夫が多い。",t:["opt","sns"]},
+  ]],
+  ["10","群馬",[
+   {k:"施設",n:"OPEN HOUSE ARENA OTA",d:"太田市に2023年開業したアリーナ。群馬クレインサンダーズの本拠地で、親会社は不動産のオープンハウス。",w:"不動産会社がクラブを持つと何が変わるかを見られる事例。",t:["opt"]},
+  ]],
+  ["11","埼玉",[
+   {k:"施設",n:"ベルーナドーム",d:"山を削った球場に後から屋根だけを付けたため、壁がなく外の空気が入る半屋外ドーム。夏は暑く春は寒いことで有名。",s:"「壁のないドーム」は説明するだけで笑いが取れる。",t:["sns"]},
+   {k:"施設",n:"熊谷ラグビー場",d:"2019年ラグビーW杯会場。熊谷市はラグビーのまちとして合宿誘致や大会運営に力を入れている。",t:["opt"]},
+  ]],
+  ["12","千葉",[
+   {k:"施設",n:"JFA夢フィールド",d:"幕張に2020年できたサッカー日本代表のトレーニング拠点。隣接する温浴施設と一体で整備された。",t:["opt","sns"]},
+   {k:"施設",n:"LaLa arena TOKYO-BAY",d:"船橋に2024年開業、約1万人収容のアリーナ。千葉ジェッツの本拠地で、MIXIが主体となって建てた。",w:"IT企業が建てたアリーナ。チケット・ファン体験のデジタル職が多い。",t:["work","opt"]},
+  ]],
+  ["13","東京",[
+   {k:"会社",n:"ヨネックス本社",d:"文京区湯島に本社。ラケットやシャトルの国内トップメーカーで、企画・マーケ・品質管理など営業以外の職種もある。",w:"「自分が信じられる商品」の筆頭。用品メーカー本社ルートの第一候補として採用情報を見る価値あり。",t:["work","bad"]},
+   {k:"施設",n:"味の素ナショナルトレーニングセンター／JISS",d:"北区西が丘にある日本代表の強化拠点と国立スポーツ科学センター。バドミントン代表もここで練習する。映像・データ分析の専門職がいる。",w:"「分析×言語化」の最前線。直接は難しくても、仕事内容を知ると目標が具体的になる。",t:["opt","bad"]},
+  ]],
+  ["14","神奈川",[
+   {k:"会社",n:"横浜DeNAベイスターズ",d:"球場を中心に周辺の街まで使う「横浜スポーツタウン構想」を進める球団。関内の旧市庁舎跡の再開発にも関わる。",w:"球団経営の改革で有名。マーケ・事業開発の職種が多く、関東進出時の候補。",t:["work","opt"]},
+   {k:"施設",n:"横浜BUNTAI",d:"旧横浜文化体育館を建て替え、2024年に開業したアリーナ。プロレス・ボクシングの聖地を引き継ぐ。",t:["opt"]},
+  ]],
+ ],
+ "中部":[
+  ["15","新潟",[
+   {k:"会社",n:"ヨネックス 新潟工場（長岡市）",d:"ヨネックス創業の地にある主力工場で、ラケットを生産する。2016年にはラケット用の長岡第二工場が完成した。",w:"生産・品質管理・技術職の入口。工場見学ができるか確認してみる価値あり。",s:"ラケットが作られる工程は、バド界隈では確実に刺さる。",t:["work","sns","bad"]},
+   {k:"会社",n:"アルビレックス新潟グループ",d:"サッカー・バスケ・野球・陸上・スキーなど、同じ名前で多くの競技のクラブを持つ。スポーツの専門学校も関連にある。",t:["opt"]},
+  ]],
+  ["16","富山",[
+   {k:"会社",n:"トナミ運輸 バドミントン部",d:"砺波市が本社の運送会社。日本トップレベルの実業団バドミントンチームを長く持ち、多くの日本代表を育ててきた。",s:"「運送会社がなぜバドミントン最強クラスなのか」は話しがいがある。",t:["sns","bad"]},
+   {k:"会社",n:"ヨネックス 富山工場（立山町・2027年完成予定）",d:"バドミントンラケットとストリングの新工場。富山がバドミントンの盛んな地域であることも立地の理由。2026年7月には長岡で1〜2年働いてから移る立ち上げ要員の求人が出ていた。",w:"新工場の立ち上げ期は採用が増える。工場勤務の働き方(交代勤務の有無)は要確認。",t:["work","bad"]},
+   {k:"会社",n:"ゴールドウイン",d:"富山発祥のスポーツウェア企業。THE NORTH FACEの国内展開で知られ、地元で自然体験型の施設づくりも進めている。",w:"アウトドア×スポーツの大手。企画・EC・店舗運営の職種がある。",t:["work"]},
+  ]],
+  ["17","石川",[
+   {k:"施設",n:"金沢ゴーゴーカレースタジアム",d:"2024年開業のサッカー専用スタジアム。ツエーゲン金沢の本拠地で、ネーミングライツは地元のカレーチェーン。",s:"スタジアム名がカレー屋、は覚えてもらいやすい。",t:["sns"]},
+  ]],
+  ["18","福井",[
+   {k:"会社",n:"福井ブローウィンズ",d:"2023年に誕生したBリーグクラブ。短期間で上位リーグに上がり、観客数を伸ばしている新興クラブ。",w:"立ち上げ期のクラブは仕事の範囲が広くなりがち。「指示が明確」の条件と合うか要注意。",t:["opt"]},
+  ]],
+  ["19","山梨",[
+   {k:"会社",n:"ヴァンフォーレ甲府",d:"小さな予算のクラブながら2022年に天皇杯で優勝。地元企業と行政の支えで続いている地方クラブの代表例。",s:"「J2クラブが日本一」は今でも語れる物語。",t:["opt","sns"]},
+   {k:"施設",n:"富士北麓公園",d:"富士山のふもと、標高約1,000mにある陸上競技場。高地トレーニングの合宿地として使われる。",t:["opt"]},
+  ]],
+  ["20","長野",[
+   {k:"会社",n:"シナノ（佐久市）",d:"スキーポールやトレッキングポールの国内メーカー。小さな分野で世界と戦う専門メーカーの例。",w:"専門用品メーカーの働き方を知る材料。",t:["opt"]},
+   {k:"施設",n:"白馬ジャンプ競技場",d:"1998年長野五輪の会場。展望台まで上がって、ジャンプ台の高さを体験できる。",s:"ジャンパー目線の写真は迫力がある。",t:["sns"]},
+  ]],
+  ["21","岐阜",[
+   {k:"会社",n:"ミズノテクニクス（養老町）",d:"ミズノの生産会社。野球のバットやグラブなど、プロ選手向けの製品も作る職人の工場。",w:"「選手の要望を言葉で受け取り形にする」仕事が近い。用品×言語化の接点。",t:["work","opt"]},
+   {k:"施設",n:"飛騨御嶽高原高地トレーニングエリア",d:"標高1,200〜2,200mにまたがる高地トレーニング施設。マラソンなど持久系の選手が合宿する。",t:["opt"]},
+  ]],
+  ["22","静岡",[
+   {k:"会社",n:"SPLYZA（浜松市）",d:"スポーツ映像分析アプリ「SPLYZA Teams」の会社。部活動や学校の授業でも使われている。",w:"分析×教える×言語化が重なる。カスタマーサクセス職に注目（仕事マップにも掲載済み）。",t:["work","bad"]},
+   {k:"施設",n:"伊豆ベロドローム",d:"東京2020の自転車トラック競技会場。屋内の木製バンクで、一般向けの体験会もある。",t:["opt","sns"]},
+  ]],
+  ["23","愛知",[
+   {k:"施設",n:"IGアリーナ",d:"名古屋城の隣に2025年開業したアリーナ。大相撲名古屋場所やバスケ、コンサートが開かれる。2026年アジア大会の会場にもなった。",w:"新しいアリーナは運営スタッフの採用が続きやすい。",t:["work","opt"]},
+  ]],
+ ],
+ "近畿":[
+  ["24","三重",[
+   {k:"施設",n:"鈴鹿サーキット",d:"F1日本グランプリの開催地。遊園地とホテルを併設し、モータースポーツを家族の行楽にした先駆け。",t:["opt","sns"]},
+   {k:"会社",n:"ヴィアティン三重",d:"サッカー・バレーボールなど複数の競技を持つ総合型のクラブ。地域スポーツの運営モデルとして見る価値あり。",t:["opt"]},
+  ]],
+  ["25","滋賀",[
+   {k:"施設",n:"瀬田川（ボート競技）",d:"琵琶湖から流れる瀬田川は、大学や実業団のボート部が集まる練習の聖地。",t:["opt"]},
+   {k:"会社",n:"滋賀レイクス",d:"Bリーグクラブ。2025年の国スポに合わせて整備されたアリーナを使う。",t:["opt"]},
+  ]],
+  ["26","京都",[
+   {k:"施設",n:"サンガスタジアム by KYOCERA",d:"亀岡市に2020年開業したサッカー専用スタジアム。京都駅から電車で行ける距離にある。",t:["opt"]},
+   {k:"会社",n:"ワコール（人間科学研究所）",d:"下着メーカーが、体の動きを研究してスポーツタイツ「CW-X」を作った。研究所で人の体を計測している。",w:"体の分析が商品になる例。スポーツ×意外な分野の典型。",s:"「下着メーカーがスポーツタイツ」は意外性が高い。",t:["opt","sns"]},
+  ]],
+  ["27","大阪",[
+   {k:"会社",n:"ゴーセン",d:"1951年創業の糸のメーカー。バドミントン・テニスのガット、釣り糸、産業資材を作る。大阪に拠点、工場は兵庫県加東市。2006年からニッケ（日本毛織）グループ。",w:"バドミントン用品メーカーの本社。ヨネックス以外の選択肢として採用情報を見る価値あり。",t:["work","bad"]},
+   {k:"会社",n:"ミズノ",d:"大阪本社の総合スポーツメーカー。バドミントンラケットも作る。研究開発拠点では選手の動きを計測して商品に反映している。",w:"大手で職種が多い。研究・企画・EC・カスタマー対応など営業以外の入口がある。",t:["work","bad"]},
+  ]],
+  ["28","兵庫",[
+   {k:"会社",n:"アシックス（スポーツ工学研究所）",d:"神戸本社。研究所では走りや動きを計測し、シューズ開発に使っている。バドミントンシューズも作る。",w:"「動きの分析」が仕事になっている代表格。",t:["work","bad"]},
+   {k:"施設",n:"ジーライオンアリーナ神戸",d:"2025年に神戸の海沿いに開業したアリーナ。神戸ストークスの本拠地。",s:"海が見えるアリーナは写真映えする。",t:["opt","sns"]},
+  ]],
+  ["29","奈良",[
+   {k:"会社",n:"奈良クラブ",d:"J3のサッカークラブ。地域のファン参加やユニークな運営方針で注目された。奈良県は靴下の生産量でも全国上位で、スポーツソックスの工場が多い。",t:["opt"]},
+  ]],
+  ["30","和歌山",[
+   {k:"施設",n:"上富田スポーツセンター",d:"ラグビーの合宿地として知られ、冬に全国から高校・大学チームが集まる。温暖な気候を使った合宿誘致の例。",t:["opt"]},
+  ]],
+ ],
+ "中国・四国":[
+  ["31","鳥取",[
+   {k:"会社",n:"ワールドウィング",d:"鳥取市にある初動負荷トレーニングの施設。イチローら多くのトップ選手が通ったことで有名。",s:"「トップ選手がなぜ鳥取に通うのか」は気になるネタ。",t:["opt","sns"]},
+  ]],
+  ["32","島根",[
+   {k:"会社",n:"島根スサノオマジック",d:"バンダイナムコが経営するBリーグクラブ。人口の少ない県でも上位クラブになった例。",w:"ゲーム会社がクラブを持つとファン体験がどう変わるか見られる。",t:["opt"]},
+  ]],
+  ["33","岡山",[
+   {k:"会社",n:"ファジアーノ岡山",d:"2024年シーズンにJ1昇格を決めたクラブ。地元企業を巻き込んだ経営で知られる。",t:["opt"]},
+  ]],
+  ["34","広島",[
+   {k:"会社",n:"ミカサ／モルテン",d:"どちらも広島のボールメーカー。バレーボールやバスケ、サッカーの国際大会の公式球を作っている。",s:"「五輪のボールは広島製」は意外性あり。",t:["opt","sns"]},
+   {k:"施設",n:"エディオンピースウイング広島",d:"2024年開業、広島市の中心部にあるサッカースタジアム。街なかに建てたことで来場の仕方が変わった。",t:["opt"]},
+  ]],
+  ["35","山口",[
+   {k:"会社",n:"ファーストリテイリング（ユニクロ）",d:"山口発祥。錦織圭選手や車いすテニスの国枝慎吾さんなどと契約し、スポーツ選手のウェアを手がけてきた。",t:["opt","sns"]},
+   {k:"会社",n:"レノファ山口FC",d:"地域リーグからJリーグに上がったクラブ。県全体をホームにしている。",t:["opt"]},
+  ]],
+  ["36","徳島",[
+   {k:"会社",n:"大塚製薬",d:"徳島発祥。ポカリスエットの会社で、熱中症対策やスポーツ栄養の研究、選手サポートに力を入れる。鳴門にスポーツパークがある。",w:"スポーツ栄養×言語化の仕事（選手やチームへの情報提供）がある分野。",t:["work","opt"]},
+  ]],
+  ["37","香川",[
+   {k:"施設",n:"あなぶきアリーナ香川",d:"高松に2025年開業した県立アリーナ。建築家ユニットSANAAの設計で、建物そのものが見どころ。",s:"建築好きにも届く写真ネタになる。",t:["opt","sns"]},
+  ]],
+  ["38","愛媛",[
+   {k:"会社",n:"FC今治",d:"元日本代表監督の岡田武史さんが経営するクラブ。里山の中にスタジアムを作り、教育事業にも取り組む。",s:"岡田さんの言葉は引用しやすく、発信の材料になる。",t:["opt","sns"]},
+   {k:"施設",n:"しまなみ海道",d:"今治と尾道を結ぶサイクリングの聖地。レンタサイクルの乗り捨てが整備されている。",t:["opt","sns"]},
+  ]],
+  ["39","高知",[
+   {k:"施設",n:"春野運動公園",d:"プロ野球の春季キャンプ地。キャンプ誘致は地方のスポーツ観光の大事な柱。",t:["opt"]},
+   {k:"会社",n:"高知ユナイテッドSC",d:"2025年にJリーグ（J3）入りした、四国で最も新しいJクラブ。",t:["opt"]},
+  ]],
+ ],
+ "九州・沖縄":[
+  ["40","福岡",[
+   {k:"施設",n:"みずほPayPayドーム＋BOSS E・ZO FUKUOKA",d:"ドームの隣に体験型の複合施設があり、ビルの外を走るコースターなどがある。試合がない日も人が集まる仕組み。",t:["opt","sns"]},
+   {k:"会社",n:"久留米の靴メーカー（ムーンスター／アサヒシューズ）",d:"久留米はゴム底の靴で発展した「靴のまち」。体育館シューズや運動靴を作ってきた。",t:["opt"]},
+  ]],
+  ["41","佐賀",[
+   {k:"施設",n:"SAGAアリーナ",d:"2023年開業。国スポに合わせて建てられ、映像・音響設備に力を入れたアリーナ。佐賀県はスポーツで人を呼ぶ政策を進めている。",t:["opt"]},
+  ]],
+  ["42","長崎",[
+   {k:"施設",n:"長崎スタジアムシティ",d:"2024年開業。サッカースタジアム、アリーナ、ホテル、商業施設を一体にした街。ジャパネットグループが民間で建てた。",w:"民間主導の大型施設で、運営・イベント・ホテルなど多くの職種がある。",s:"「通販会社がスタジアムの街を作った」は強いネタ。",t:["work","opt","sns"]},
+  ]],
+  ["43","熊本",[
+   {k:"会社",n:"熊本ヴォルターズ",d:"Bリーグクラブ。熊本地震の後、地域の支えになった活動で知られる。",t:["opt"]},
+  ]],
+  ["44","大分",[
+   {k:"施設",n:"太陽の家（別府市）",d:"障がいのある人が働き、暮らす施設として1965年に設立。創設者の中村裕医師は日本のパラスポーツの父と呼ばれる。",t:["opt","sns"]},
+   {k:"施設",n:"大分国際車いすマラソン",d:"1981年に始まった、車いすだけで行われる世界初の国際マラソン大会。",t:["opt"]},
+  ]],
+  ["45","宮崎",[
+   {k:"施設",n:"生目の杜運動公園",d:"プロ野球の春季キャンプ地。2月は全国からファンが集まる。宮崎はサーフィンの街としても知られる。",t:["opt","sns"]},
+  ]],
+  ["46","鹿児島",[
+   {k:"施設",n:"いぶすき菜の花マラソン",d:"毎年1月、菜の花が咲く中を走る市民マラソン。地元の手厚いおもてなしで人気。",s:"大会運営やボランティアの話は交流のネタになる。",t:["opt","sns"]},
+   {k:"会社",n:"鹿児島ユナイテッドFC",d:"Jリーグクラブ。県のスポーツ合宿誘致とも連携している。",t:["opt"]},
+  ]],
+  ["47","沖縄",[
+   {k:"施設",n:"沖縄アリーナ",d:"2021年開業。2023年バスケW杯の会場になった。琉球ゴールデンキングスの本拠地で、演出の力でBリーグトップクラスの観客を集める。",w:"アリーナ演出・ファン体験の最先端。",s:"試合演出の映像はSNSでよく伸びる。",t:["opt","sns"]},
+  ]],
+ ],
+};
+const S={
+ sendaiArena:["仙台市 市長記者会見(2025年5月)","https://www.city.sendai.jp/sesakukoho/gaiyo/shichoshitsu/kaiken/2025/05/27sendaishiarena1.html"],
+ park:["パ・リーグ公式(2026年1月)","https://pacificleague.com/en/news/2026/1/10046496"],
+ jitsugyo:["全日本実業団バドミントン選手権 要項","https://actsaikyo-badminton.jp/wp/wp-content/uploads/2024/06/d272af851e8f303f7519a3fb905b8c23.pdf"],
+ b89:["BASEBALL KING","https://baseballking.jp/ns/704994/"],
+ cityPro:["仙台市 プロスポーツ事業報告","https://www.city.sendai.jp/sports-jigyo/kurashi/manabu/sports/prosports/documents/r5jigyohokoku.pdf"],
+ ikuei22:["SPREAD","https://spread-sports.jp/archives/151408"],
+ hb25:["宮城県高野連","https://www.miyagi-kouyaren.com/news.cgi?id=240501750855502"],
+ jfa25:["JFA","http://www.jfa.jp/match/alljapan_highschool_2025/news/00035791/"],
+ meisei:["バスケットボールキング","https://basketballking.jp/news/japan/highschool/20201229/303073.html"],
+ furukawa:["宮城県 表彰資料(2023年1月)","https://www.pref.miyagi.jp/documents/43970/20230131_hyokei.pdf"],
+ ih19:["宮城県 令和元年度全国高校総体の結果","https://www.pref.miyagi.jp/documents/17521/755489.pdf"],
+ hanyu:["All About ニュース","https://news.allabout.co.jp/articles/o/82203/"],
+ monument:["Sportiva(2017年4月)","https://sportiva.shueisha.co.jp/clm/othersports/figure/2017/04/19/___split_9/"],
+ myoji:["名字由来net","https://myoji-yurai.net/columnMiyagi.htm"],
+ nta:["日本旅行 宮城観光","https://www.nta.co.jp/kanko/kokunai/miyagi/"],
+ hankyu:["阪急交通社 宮城ガイド","https://www.hankyu-travel.com/guide/tohoku/miyagi/"],
+ omiyage:["マイナビおすすめナビ","https://osusume.mynavi.jp/articles/9933/"],
+ gyutan:["nippon.com","https://www.nippon.com/ja/guide-to-japan/gu900010/"],
+ gourmet:["MAPPLE","https://www.mapple.net/article/46932/"],
+ urakasumi:["東北観光推進機構","https://www.tohokukanko.jp/attractions/detail_1009361.html"],
+ sake:["仙台国税局 酒蔵資料","https://www.nta.go.jp/about/organization/sendai/sake/sakagura/pdf/jpn/04_mis_ja.pdf"],
+ genji:["るるぶ&more.","https://rurubu.jp/andmore/spot/80003281"],
+ yokocho:["MAPPLE","https://www.mapple.net/article/47202/"],
+ tandori:["食べログまとめ","https://tabelog.com/matome/30046/"],
+ ramen:["MAPPLE","https://www.mapple.net/original/392668/"],
+ ramen2:["食べログまとめ","https://tabelog.com/matome/3286/"],
+ cafe:["MAPPLE","https://www.mapple.net/article/47300/"],
+ procope:["食べログ","https://s.tabelog.com/en/miyagi/A0401/A040101/4001622/"],
+ revo:["流通ニュース","https://www.ryutsuu.biz/store/r100272.html"],
+ izui:["DIME","https://dime.jp/genre/1763604/"],
+ wwd:["WWDJAPAN","https://www.wwdjapan.com/articles/2331210"],
+};
+const DETAIL={
+ "04":{name:"宮城",updated:"2026年11月13日",groups:[
+  {g:"スポーツ",cats:[
+   {c:"スポーツ施設",items:[
+    {n:"楽天モバイル 最強パーク宮城",d:"楽天イーグルスの本拠地で、球場は宮城県が持っている。2026年1月から今の名前になった（前は楽天モバイルパーク宮城）。",s:["park"]},
+    {n:"ゼビオアリーナ仙台",d:"ゼビオの寄付で仙台市の施設になり、2025年7月にリニューアル。スケートリンクとアリーナを併用できる、全国でもほとんど例のない施設。",t:"「長町のアリーナ、今はスケートリンクもあるの知ってる？」",s:["sendaiArena"]},
+    {n:"カメイアリーナ仙台",d:"2024年の全日本実業団バドミントン選手権の会場（元気フィールド仙台と2会場）。",s:["jitsugyo"]},
+   ]},
+   {c:"スポーツ企業・クラブ",items:[
+    {n:"楽天野球団（東北楽天ゴールデンイーグルス）",d:"プロ野球。2024年の本拠地の観客は66試合で約155万人。",s:["cityPro"]},
+    {n:"仙台89ERS",d:"バスケ。2026-27シーズンから新しいトップリーグ「Bリーグ・プレミア」に参加。ゼビオアリーナ仙台が本拠地。",s:["b89"]},
+    {n:"ベガルタ仙台／マイナビ仙台レディース",d:"サッカーの男子・女子のクラブ。仙台市はこの4チームを「仙台のプロスポーツ」として支援している。",s:["cityPro"]},
+   ]},
+   {c:"強豪校（野球・サッカー・バスケ・バレー・バド）",items:[
+    {n:"野球：仙台育英",d:"2022年夏の甲子園で東北勢として初めて優勝。優勝旗が初めて「白河の関」を越えた。2025年夏も宮城大会で優勝。",t:"「青春って、すごく密なので」という監督の言葉は、高校野球ファンなら知っている名言。",s:["ikuei22","hb25"]},
+    {n:"サッカー：聖和学園",d:"2025年度の全国高校サッカー選手権に宮城代表として出場した（優勝した仙台育英が辞退したため）。",s:["jfa25"]},
+    {n:"バスケ：仙台大学附属明成",d:"ウインターカップ優勝6回は、能代工業（秋田）に次ぐ歴代2位。2013〜15年には3連覇。",s:["meisei"]},
+    {n:"バレー：古川学園（女子）",d:"2023年1月の春高バレーで、23大会ぶりに優勝。",s:["furukawa"]},
+    {n:"バドミントン：聖ウルスラ学院英智",d:"2019年のインターハイで男子団体優勝。",s:["ih19"]},
+   ]},
+   {c:"スポーツの有名人",items:[
+    {n:"羽生結弦（フィギュアスケート）",d:"仙台市出身。ソチ・平昌の五輪で2大会連続の金メダル。",s:["hanyu"]},
+    {n:"荒川静香（フィギュアスケート）",d:"2006年トリノ五輪の金メダリストで、宮城県の県民栄誉賞を受けた。地下鉄の国際センター駅前に、羽生さんと並ぶモニュメントがある。",t:"「国際センター駅のモニュメント、金メダリスト2人分なんですよ」",s:["monument"]},
+    {n:"本郷理華（フィギュア）・由規（プロ野球）",d:"どちらも宮城県出身の選手として紹介されている。",s:["myoji"]},
+   ]},
+  ]},
+  {g:"旅・食・買う",cats:[
+   {c:"旅行",items:[
+    {n:"松島",d:"日本三景のひとつ。島めぐりの観光船、伊達政宗の菩提寺の瑞巌寺、五大堂が定番。",s:["nta"]},
+    {n:"仙台城跡",d:"伊達政宗が築いた城の跡。仙台の街を一望できる。",s:["nta"]},
+    {n:"秋保・作並・鳴子の温泉",d:"秋保と作並は仙台の奥座敷。鳴子は紅葉の鳴子峡が有名。冬は仙台の光のページェント、春は白石川堤の一目千本桜も人気。",s:["hankyu"]},
+   ]},
+   {c:"お土産",items:[
+    {n:"萩の月（菓匠三全）",d:"カステラでカスタードを包んだ銘菓。常温で日持ちし、仙台駅で買える。",s:["omiyage"]},
+    {n:"喜久福（井ヶ田製茶）",d:"餅で生クリームとあんを包んだ大福。ずんだ・抹茶など4種類。半解凍で食べるのがおすすめ。",s:["omiyage"]},
+    {n:"笹かまぼこ",d:"明治時代、ヒラメの大漁をきっかけに生まれた。鐘崎や白謙がよく知られる。",s:["omiyage"]},
+   ]},
+   {c:"ご当地グルメ",items:[
+    {n:"牛たん焼き",d:"焼き鳥店「太助」の佐野啓四郎さんが、タンシチューから思いついたのが始まりとされる。始まりは1948年とされることが多いが、資料によって年が違う。",t:"「牛たん焼きって、もとは焼き鳥屋さんのアイデアなんですよ」",s:["gyutan"]},
+    {n:"はらこ飯",d:"亘理の郷土料理。鮭の煮汁で炊いたご飯に、鮭とイクラをのせる秋の味覚。",s:["gourmet"]},
+    {n:"せり鍋・ずんだ餅",d:"せりの生産量は宮城が全国1位で、根まで食べるせり鍋は冬の定番。ずんだ餅は枝豆をすりつぶした甘味。",s:["gourmet"]},
+   ]},
+   {c:"お酒",items:[
+    {n:"浦霞（佐浦・塩竈市）",d:"1724年創業とされる酒蔵。本社横の「浦霞 酒ギャラリー」で利き酒ができ、県内限定の商品もある。",s:["urakasumi"]},
+    {n:"一ノ蔵（大崎市）",d:"予約すれば見学できる酒蔵。",s:["sake"]},
+    {n:"ニッカウヰスキー 宮城峡蒸溜所（仙台市青葉区）",d:"ウイスキーができるまでを見学できる。休業日があるので公式サイトで確認してから行く。",s:["sake"]},
+   ]},
+   {c:"居酒屋",items:[
+    {n:"源氏（文化横丁）",d:"1950年創業とされる老舗。コの字型のカウンターだけの店で、お酒を頼むとお通しが付く。日・月・祝日が休み。",s:["genji"]},
+    {n:"文化横丁・壱弐参横丁",d:"一番町の隣り合う2つの横丁。小さな店が並び、はしご酒に向いている。",s:["yokocho"]},
+   ]},
+   {c:"ランチ",items:[
+    {n:"仙台駅「牛たん通り」",d:"新幹線の中央改札のすぐ近く。伊達の牛たん本舗、利久、喜助、善治郎、焼助、伊勢屋の6店が並ぶ。",s:["tandori"]},
+    {n:"たんや善治郎",d:"手切りの厚い牛たんを炭火で焼く店。牛たん定食のランチは1,000円台から。",s:["tandori"]},
+   ]},
+   {c:"ラーメン",items:[
+    {n:"仙台のラーメンは味噌が基本",d:"まろやかな味噌に辛さを効かせるのが仙台らしさ。全国的な知名度は高くないが、歴史は長い。",s:["ramen"]},
+    {n:"味よし",d:"辛味噌ラーメンを仙台のラーメンとして広めた店。カップ麺も出ている。",s:["ramen"]},
+    {n:"中華そば 嘉一",d:"鶏だけでとったスープの中華そばで評判の店。",s:["ramen2"]},
+   ]},
+   {c:"カフェ",items:[
+    {n:"カフェ プロコプ（一番町）",d:"仙台では老舗の自家焙煎の珈琲専門店。アンティークの家具が並ぶ静かな店。",s:["procope"]},
+    {n:"自家焙煎 松本珈琲 Matsurica 1978（立町）",d:"メニューはコーヒーだけの自家焙煎の専門店。",s:["cafe"]},
+    {n:"珈琲まめ坊（北山）",d:"生豆から自家焙煎するスペシャルティコーヒーの店。",s:["cafe"]},
+   ]},
+   {c:"アパレル・ブランド",items:[
+    {n:"REVOLUTION（リヴォルーション）",d:"1981年に仙台で創業したセレクトショップ。海外ブランドを早くから日本に紹介してきた。",s:["revo"]},
+    {n:"SENDAI IZUI & Go.",d:"宮城の方言「いずい」（しっくりこない、の意味）をテーマにしたアパレルブランド。",t:"「『いずい』ってブランドがあるの、知ってる？」は県外の人との会話で使える。",s:["izui"]},
+    {n:"NARIWAI",d:"仙台市青葉区のセレクトショップ。",s:["wwd"]},
+   ]},
+  ]},
+ ],
+ gaps:"確認できなかったもの：仙台辛味噌ラーメンの発祥の店、古川学園の春高の通算優勝回数、2025年のプロチームの観客数。お店の営業時間や定休日は変わるので、行く前に確認してください。"}
+};
+function renderDetail(code){
+  const D=DETAIL[code];
+  const src=k=>{const x=S[k];return x?`<a href="${x[1]}" target="_blank" rel="noopener">${esc(x[0])}</a>`:""};
+  let jump="",body="";
+  D.groups.forEach((g,gi)=>{
+    let cats="";
+    g.cats.forEach((c,ci)=>{
+      const id=`c${gi}-${ci}`;
+      jump+=`<a href="#pref-${code}" data-jump="${id}">${esc(c.c.replace(/（.*）/,""))}</a>`;
+      cats+=`<div class="d-cat" id="${id}"><h3>${esc(c.c)}</h3>${c.items.map(it=>`<div class="d-item"><b>${esc(it.n)}</b><p>${esc(it.d)}</p>${it.t?`<p class="talk">話のネタ：${esc(it.t)}</p>`:""}<p class="src">出典：${it.s.map(src).join("、")}</p></div>`).join("")}</div>`;
+    });
+    body+=`<section class="d-group"><h2>${esc(g.g)}</h2><div class="d-grid">${cats}</div></section>`;
+  });
+  document.getElementById("detail-body").innerHTML=`<a class="d-back" href="#list">← 都道府県の一覧へ</a>
+   <h1 class="d-title">${code} ${esc(D.name)}</h1>
+   <p class="d-meta">15項目・すべて出典つき（${D.updated} ウェブで確認）</p>
+   <div class="d-jump">${jump}</div>${body}<p class="d-gap">${esc(D.gaps)}</p>`;
+}
+function route(){
+  const m=location.hash.match(/^#pref-(\d\d)$/);
+  const on=m&&DETAIL[m[1]];
+  document.getElementById("detail").hidden=!on;
+  document.querySelector("main").hidden=!!on;
+  document.querySelector(".bar").hidden=!!on;
+  document.querySelector("header.hero").hidden=!!on;
+  if(on){renderDetail(m[1]);window.scrollTo(0,0)}
+}
+addEventListener("hashchange",route);
+document.getElementById("detail").addEventListener("click",e=>{
+  const a=e.target.closest("a[data-jump]");if(!a)return;
+  e.preventDefault();document.getElementById(a.dataset.jump).scrollIntoView({behavior:"smooth",block:"start"});
+});
+const TAGNAME={work:"仕事",opt:"選択肢",sns:"SNS",bad:"バド"};
+let filter="all";
+let stars=new Set();
+try{stars=new Set(JSON.parse(localStorage.getItem("s47-stars")||"[]"))}catch(e){}
+function saveStars(){try{localStorage.setItem("s47-stars",JSON.stringify([...stars]))}catch(e){}}
+try{const f=localStorage.getItem("s47-filter");if(f)filter=f}catch(e){}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function render(){
+  document.querySelectorAll("button.chip").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.f===filter)));
+  let html="",total=0;
+  for(const [region,prefs] of Object.entries(R)){
+    let rh="";
+    for(const [code,pname,items] of prefs){
+      const shown=items.filter(it=>{
+        const id=code+":"+it.n;
+        if(filter==="all")return true;
+        if(filter==="star")return stars.has(id);
+        return it.t.includes(filter);
+      });
+      if(!shown.length)continue;
+      total+=shown.length;
+      rh+=`<article class="pref"><div class="pref-head"><span class="code">${code}</span><span class="pname">${pname}</span>${DETAIL[code]?`<a class="more" href="#pref-${code}">15項目を見る</a>`:""}</div>`;
+      for(const it of shown){
+        const id=code+":"+it.n;
+        const q=encodeURIComponent(it.n+" "+pname);
+        rh+=`<div class="item"><div class="item-top"><span class="kind">${it.k}</span>
+          <span class="iname"><a href="https://www.google.com/search?q=${q}" target="_blank" rel="noopener">${esc(it.n)}</a></span>
+          <button class="star" data-id="${esc(id)}" aria-pressed="${stars.has(id)}" aria-label="${esc(it.n)}を気になるに追加">★</button></div>
+          <p class="desc">${esc(it.d)}</p>
+          ${it.w?`<p class="note w"><b>仕事目線</b>　${esc(it.w)}</p>`:""}
+          ${it.s?`<p class="note s"><b>ネタ</b>　${esc(it.s)}</p>`:""}
+          <div class="tags">${it.t.map(t=>`<span class="tag ${t}">${TAGNAME[t]}</span>`).join("")}</div></div>`;
+      }
+      rh+=`</article>`;
+    }
+    if(rh)html+=`<section class="region"><h2>${region}<small>${prefs[0][0]}–${prefs[prefs.length-1][0]}</small></h2><div class="grid">${rh}</div></section>`;
+  }
+  document.getElementById("list").innerHTML=html||`<p class="empty">${filter==="star"?"まだ★がありません。気になる施設・会社の★を押すとここに集まります。":"該当なし"}</p>`;
+  document.getElementById("count").textContent=`${total}件表示`;
+}
+document.querySelector(".bar").addEventListener("click",e=>{
+  const b=e.target.closest("button.chip");if(!b)return;
+  filter=b.dataset.f;try{localStorage.setItem("s47-filter",filter)}catch(e){}render();
+});
+document.getElementById("list").addEventListener("click",e=>{
+  const b=e.target.closest("button.star");if(!b)return;
+  const id=b.dataset.id;stars.has(id)?stars.delete(id):stars.add(id);saveStars();
+  b.setAttribute("aria-pressed",String(stars.has(id)));
+  if(filter==="star")render();
+});
+render();route();
+</script>
