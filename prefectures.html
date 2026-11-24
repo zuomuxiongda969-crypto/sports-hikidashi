@@ -536,7 +536,7 @@ function renderDetail(code){
    <div class="d-jump">${jump}</div>${body}<p class="d-gap">${esc(D.gaps)}</p>`;
 }
 // 宮城以外の県は data/pref-XX.js に分けて、開いたときだけ読み込む
-const AVAIL=["01", "02", "03", "05", "06", "07"];
+const AVAIL=["01", "02", "03", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14"];
 const hasDetail=c=>!!DETAIL[c]||AVAIL.includes(c);
 const loading={};
 function loadPref(c){
