@@ -12,6 +12,7 @@ Object.assign(S,{
  "22:plamo2":["静岡市 プラモデル","https://www.city.shizuoka.lg.jp/000_004151.html"],
 });
 Object.assign(PHOTOS,{});
+Object.assign(PHOTOS,{"22:aisuta": {"src": "img/p/22-aisuta.jpg", "credit": "Barry Valder / CC0", "page": "https://commons.wikimedia.org/wiki/File:Nihondaira_Stadium_Shimizu_Looking_Towards_Mt._Fuji.JPG"}, "22:ecopa": {"src": "img/p/22-ecopa.jpg", "credit": "健ちゃん at Japanese Wikipedia / CC BY-SA 3.0", "page": "https://commons.wikimedia.org/wiki/File:Shizuoka_Stadium_ECOPA.jpg"}, "22:oden": {"src": "img/p/22-oden.jpg", "credit": "Halowand / CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Shizuoka_Oden_Yokocho.JPG"}, "22:gyoza": {"src": "img/p/22-gyoza.jpg", "credit": "Ocdp / CC0", "page": "https://commons.wikimedia.org/wiki/File:Hamamatsu_Gy%C5%8Dza_001.jpg"}});
 DETAIL["22"]={name:"静岡",updated:"2026年11月24日",groups:[
  {g:"スポーツ",cats:[
   {c:"スポーツ施設",items:[

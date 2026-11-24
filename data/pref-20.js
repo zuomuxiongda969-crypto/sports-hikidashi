@@ -12,6 +12,7 @@ Object.assign(S,{
  "20:epson":["the社史 セイコーエプソン","https://the-shashi.com/tse/6724/chapter-1/"],
 });
 Object.assign(PHOTOS,{});
+Object.assign(PHOTOS,{"20:mwave": {"src": "img/p/20-mwave.jpg", "credit": "Maclourin / CC BY-SA 3.0", "page": "https://commons.wikimedia.org/wiki/File:M-wave.JPG"}, "20:whitering": {"src": "img/p/20-whitering.jpg", "credit": "快速踊り子 / CC0", "page": "https://commons.wikimedia.org/wiki/File:White-ring_Seen_from_Olympic_Bridge.jpg"}, "20:oyaki": {"src": "img/p/20-oyaki.jpg", "credit": "NY066 / CC BY-SA 3.0", "page": "https://commons.wikimedia.org/wiki/File:Nozawana-Oyaki-Nagano.JPG"}});
 DETAIL["20"]={name:"長野",updated:"2026年11月24日",groups:[
  {g:"スポーツ",cats:[
   {c:"スポーツ施設",items:[

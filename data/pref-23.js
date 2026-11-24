@@ -11,6 +11,7 @@ Object.assign(S,{
  "23:toyota2":["the社史 トヨタ自動車","https://the-shashi.com/tse/6201/chapter-1/"],
 });
 Object.assign(PHOTOS,{});
+Object.assign(PHOTOS,{"23:ig": {"src": "img/p/23-ig.jpg", "credit": "Kyu3a / CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Aichi_International_Arena_at_night_-_1.jpg"}, "23:hitsu": {"src": "img/p/23-hitsu.jpg", "credit": "Kanesue / CC BY 2.0", "page": "https://commons.wikimedia.org/wiki/File:Hitsumabushi1.jpg"}, "23:miso": {"src": "img/p/23-miso.jpg", "credit": "yosshi from Nagoya / CC BY-SA 2.0", "page": "https://commons.wikimedia.org/wiki/File:Miso_katsu_don_and_miso_soup_by_yosshi.jpg"}, "23:tebasaki": {"src": "img/p/23-tebasaki.jpg", "credit": "kawanet / CC BY 2.0", "page": "https://commons.wikimedia.org/wiki/File:Tebasaki_karaage_by_kawanet_in_Kanayama,_Nagoya.jpg"}});
 DETAIL["23"]={name:"愛知",updated:"2026年11月24日",groups:[
  {g:"スポーツ",cats:[
   {c:"スポーツ施設",items:[

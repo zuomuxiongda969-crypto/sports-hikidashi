@@ -14,6 +14,7 @@ Object.assign(S,{
  "21:companies":["SalesNow 岐阜県の企業","https://salesnow.jp/db/prefectures/gifu"],
 });
 Object.assign(PHOTOS,{});
+Object.assign(PHOTOS,{"21:hoba": {"src": "img/p/21-hoba.jpg", "credit": "Opqr / CC BY-SA 3.0", "page": "https://commons.wikimedia.org/wiki/File:Houbamiso.jpg"}, "21:takayama": {"src": "img/p/21-takayama.jpg", "credit": "Ocdp / CC0", "page": "https://commons.wikimedia.org/wiki/File:Takayama_ramen_001.jpg"}});
 DETAIL["21"]={name:"岐阜",updated:"2026年11月24日",groups:[
  {g:"スポーツ",cats:[
   {c:"スポーツ施設",items:[
