@@ -1,0 +1,47 @@
+(()=>{
+Object.assign(S,{
+ "35:hb25t":["高校野球ドットコム(2025年 山口大会データ)","https://www.hb-nippon.com/tournaments/519"],
+ "35:hb25":["高校野球ドットコム(2025年 山口県の高校野球プレーバック)","https://www.hb-nippon.com/articles/10383"],
+ "35:ih25":["山口県 2025年インターハイ(中国総体)の競技と会場","https://www.pref.yamaguchi.lg.jp/uploaded/attachment/216361.pdf"],
+ "35:salt":["防府市 中国高校バドミントン選手権の要項(ソルトアリーナ防府)","https://www.city.hofu.yamaguchi.jp/uploaded/attachment/141182.pdf"],
+ "35:renofa":["Jリーグ シャレン!アウォーズ レノファ山口","https://www.jleague.jp/sharen/awards2025/club/yamaguchi.html"],
+ "35:mirai":["ウォーカープラス 維新みらいふスタジアム","https://www.walkerplus.com/spot/ar0835s80847/"],
+ "35:uniqlo":["the社史 ファーストリテイリング 創業","https://the-shashi.com/tse/9983/decisions/founding-1949/"],
+ "35:kanko":["まっぷるウェブ 山口県の観光","https://www.mapple.net/tourism/yamaguchi"],
+ "35:gourmet":["山口県観光 瓦そば","https://yamaguchi-tourism.jp/feature/kawarasoba"],
+ "35:gourmet2":["山口県観光 お土産まとめ","https://yamaguchi-tourism.jp/feature/souvenir-summary"],
+});
+Object.assign(PHOTOS,{"35:tsunoshima": {"src": "img/p/35-tsunoshima.jpg", "credit": "Bsx / CC BY-SA 3.0", "page": "https://commons.wikimedia.org/wiki/File:Tsunoshima_%C5%8Chashi.jpg"}, "35:kawara": {"src": "img/p/35-kawara.jpg", "credit": "kagawa_ymg / CC BY 2.0", "page": "https://commons.wikimedia.org/wiki/File:%E3%81%8B%E3%82%8F%E3%82%89%E3%81%9D%E3%81%B0_%E7%93%A6%E6%96%99%E7%90%86_2014_(15778785025).jpg"}});
+DETAIL["35"]={name:"山口",updated:"2026年11月24日",groups:[
+ {g:"スポーツ",cats:[
+  {c:"スポーツ施設",items:[
+   {n:"ソルトアリーナ防府（防府市スポーツセンター）",d:"2025年夏のインターハイ（中国総体）でバドミントンは防府市と山口市で行われた。ここではその前の中国高校選手権も開かれた。",t:"バド",s:["35:ih25","35:salt"]},
+   {n:"維新みらいふスタジアム（山口市・維新百年記念公園）",d:"県でいちばん大きな多目的スタジアム。レノファ山口のホーム。",s:["35:mirai","35:renofa"]},
+  ]},
+  {c:"バドミントン（高校のベスト4）",j:"バド高校",items:[]},
+  {c:"バドミントン（実業団）",j:"バド実業団",items:[]},
+  {c:"スポーツ企業・クラブ",items:[
+   {n:"レノファ山口FC（サッカー）",d:"1949年の県教員チームが元。県内19市町すべてがホームタウン。名前の由来は「維新」。約500社のパートナーがいる。",s:["35:renofa"]},
+  ]},
+  {c:"強豪校（野球・サッカー・バスケ・バレー・バド）",items:[
+   {n:"高川学園（野球・防府市）",d:"2025年夏の山口大会決勝で南陽工に10-3で勝ち、4年ぶりの甲子園。阪神のドラフト1位選手の母校。",s:["35:hb25t","35:hb25"]},
+  ]},
+ ]},
+ {g:"旅・食・買う",cats:[
+  {c:"旅行",items:[
+   {n:"角島大橋・秋吉台・錦帯橋",p:"35:tsunoshima",d:"青い海を渡る橋、日本最大級のカルスト台地、5つのアーチの木の橋。山口の定番。",s:["35:kanko"]},
+  ]},
+  {c:"ご当地グルメ",items:[
+   {n:"ふぐ（下関）",d:"山口はふぐの本場。ふぐ刺し・ふぐちり・唐揚げ。",s:["35:gourmet2"]},
+   {n:"瓦そば（下関市・川棚温泉）",p:"35:kawara",d:"熱した瓦の上で茶そばを焼き、牛肉や錦糸卵をのせて温かいつゆで食べる。1962年からの郷土料理。",s:["35:gourmet"]},
+  ]},
+  {c:"お土産",items:[
+   {n:"山口外郎（ういろう）",d:"わらび粉を使った、ぷるんとした食感のういろう。",s:["35:gourmet2"]},
+   {n:"夏みかんのお菓子・ふぐのお茶漬け",d:"萩の夏みかんを使った菓子など。",s:["35:gourmet2"]},
+  ]},
+  {c:"発祥の企業",items:[
+   {n:"ファーストリテイリング（ユニクロ・宇部市）",d:"1949年、柳井等が宇部新川駅前で始めた紳士服店「メンズショップ小郡商事」が始まり。ユニクロ1号店は1984年に広島市で開店。",s:["35:uniqlo"]},
+  ]},
+ ]}],
+ gaps:"確認できなかったもの：高校バドミントン（県総体のベスト4）、バドミントン実業団、有名選手、居酒屋（デート向き・飲み会向き）、お酒、カフェ、アパレル。"};
+})();

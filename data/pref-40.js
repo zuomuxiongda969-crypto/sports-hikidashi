@@ -1,0 +1,43 @@
+(()=>{
+Object.assign(S,{
+ "40:hb25t":["高校野球ドットコム(2025年 福岡大会データ)","https://www.hb-nippon.com/tournaments/605"],
+ "40:hb25":["高校野球ドットコム(2025年 福岡大会決勝の展望)","https://www.hb-nippon.com/articles/6953"],
+ "40:avispa":["Jリーグ(アビスパ福岡 ルヴァンカップ初優勝)","https://www.jleague.jp/news/article/26366/"],
+ "40:avispa2":["福岡市 アビスパ福岡の優勝祝勝会","https://www.city.fukuoka.lg.jp/shisei/kouhou-hodo/hodo-happyo/2023/documents/avispa_shyukushyokai.pdf"],
+ "40:kurume":["久留米市 久留米の歴史(ゴム産業)","https://www.city.kurume.fukuoka.jp/1080kankou/2015bunkazai/3050kurumeshishi/files/storysheet9-1.pdf"],
+ "40:kurume2":["ウォーカープラス 久留米のゴム三社","https://www.walkerplus.com/article/133197/"],
+ "40:kanko":["まっぷるウェブ 福岡県の観光","https://www.mapple.net/tourism/fukuoka"],
+ "40:gourmet":["なっぷ 福岡の名物","https://nap-camp.com/mag/417"],
+});
+Object.assign(PHOTOS,{"40:besuden": {"src": "img/p/40-besuden.jpg", "credit": "セカンドベースマン / CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Hakatanomori_Football_Stadium_New_Seat.jpg"}, "40:dazaifu": {"src": "img/p/40-dazaifu.jpg", "credit": "Jakub Hałun / CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:20100719_Dazaifu_Tenmangu_Shrine_3328.jpg"}});
+DETAIL["40"]={name:"福岡",updated:"2026年11月24日",groups:[
+ {g:"スポーツ",cats:[
+  {c:"スポーツ施設",items:[
+   {n:"ベスト電器スタジアム（福岡市博多区）",p:"40:besuden",d:"アビスパ福岡のホーム。2023年のルヴァンカップ優勝のあと、市が最終戦に市民1,000人を招待した。",s:["40:avispa2"]},
+  ]},
+  {c:"バドミントン（高校のベスト4）",j:"バド高校",items:[]},
+  {c:"バドミントン（実業団）",j:"バド実業団",items:[]},
+  {c:"スポーツ企業・クラブ",items:[
+   {n:"アビスパ福岡（サッカー）",d:"2023年11月、国立競技場でのルヴァンカップ決勝で浦和に2-1で勝ち、クラブ初のタイトル。観客61,683人はこの大会の最多記録。",s:["40:avispa","40:avispa2"]},
+   {n:"久留米の「ゴム三社」（ブリヂストン・ムーンスター・アサヒシューズ）",d:"どれも久留米生まれ。ムーンスターは1873年の足袋店「つちやたび」から。ブリヂストンは1931年、足袋会社（日本足袋）のタイヤ部門が独立してできた。学校の上履きやスニーカーもこの流れ。",s:["40:kurume","40:kurume2"]},
+  ]},
+  {c:"強豪校（野球・サッカー・バスケ・バレー・バド）",items:[
+   {n:"西日本短大付（野球・八女市）",d:"2025年夏の福岡大会決勝で九州国際大付に10-1で勝ち、3季連続の甲子園。",s:["40:hb25t","40:hb25"]},
+   {n:"九州国際大付（野球・北九州市）",d:"春夏12回の甲子園、センバツ準優勝もある強豪。2025年夏は決勝で負けた。",s:["40:hb25","40:hb25t"]},
+  ]},
+ ]},
+ {g:"旅・食・買う",cats:[
+  {c:"旅行",items:[
+   {n:"太宰府天満宮・中洲の屋台",p:"40:dazaifu",d:"学問の神さまの神社と、博多の夜の屋台。",s:["40:kanko"]},
+  ]},
+  {c:"ご当地グルメ",items:[
+   {n:"博多ラーメン",d:"白くにごった豚骨スープに細麺。麺だけおかわりする「替え玉」がある。",s:["40:gourmet"]},
+   {n:"もつ鍋・水炊き",d:"福岡の二大鍋。水炊きは鶏ガラスープに鶏肉と野菜を入れてポン酢で食べる。",s:["40:gourmet"]},
+   {n:"博多うどん・ひと口餃子",d:"ごぼう天のやわらかいうどんと、鉄鍋で焼く小さな餃子。",s:["40:gourmet"]},
+  ]},
+  {c:"お土産",items:[
+   {n:"明太子・博多通りもん・めんべい・梅ヶ枝餅",d:"福岡の定番。梅ヶ枝餅は太宰府天満宮の門前名物。",s:["40:gourmet"]},
+  ]},
+ ]}],
+ gaps:"確認できなかったもの：高校バドミントン（県総体のベスト4）、バドミントン実業団、ソフトバンクホークスなど他のプロチーム、有名選手、居酒屋（デート向き・飲み会向き）、お酒、カフェ、アパレル。"};
+})();

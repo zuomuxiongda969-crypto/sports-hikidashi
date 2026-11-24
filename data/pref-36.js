@@ -1,0 +1,42 @@
+(()=>{
+Object.assign(S,{
+ "36:hb25":["高校野球ドットコム(2025年 徳島大会決勝)","https://www.hb-nippon.com/articles/7043"],
+ "36:hb25b":["高校野球ドットコム(2025年 徳島県の高校野球プレーバック)","https://www.hb-nippon.com/articles/10561"],
+ "36:pocari":["ゲキサカ 徳島ヴォルティス","https://web.gekisaka.jp/club/detail?club_id=855"],
+ "36:vortis":["スポーツナビ(大塚製薬が四国初のJクラブになるまで)","https://sports.yahoo.co.jp/column/detail/201711270003-spnavi"],
+ "36:otsuka":["the社史 大塚ホールディングス","https://the-shashi.com/tse/4578/chapter-1/"],
+ "36:kanko":["まっぷるウェブ 徳島県の観光","https://www.mapple.net/tourism/tokushima"],
+ "36:gourmet":["なっぷ 徳島の名物","https://www.nap-camp.com/mag/407"],
+});
+Object.assign(PHOTOS,{"36:uzushio": {"src": "img/p/36-uzushio.jpg", "credit": "Suicasmo / CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Naruto_whirlpools_20170609-1.jpg"}, "36:ramen": {"src": "img/p/36-ramen.jpg", "credit": "Kzaral / CC BY 2.0", "page": "https://commons.wikimedia.org/wiki/File:Tokushima_Ramen,_Men-Oh_-_May_2,_2018.jpg"}});
+DETAIL["36"]={name:"徳島",updated:"2026年11月24日",groups:[
+ {g:"スポーツ",cats:[
+  {c:"スポーツ施設",items:[
+   {n:"鳴門・大塚スポーツパーク ポカリスエットスタジアム（鳴門市）",d:"徳島ヴォルティスのホーム。約1万8千人。JR鳴門駅から歩いて約25分。",s:["36:pocari"]},
+  ]},
+  {c:"バドミントン（高校のベスト4）",j:"バド高校",items:[]},
+  {c:"バドミントン（実業団）",j:"バド実業団",items:[]},
+  {c:"スポーツ企業・クラブ",items:[
+   {n:"大塚製薬（鳴門市）",d:"1921年に鳴門で、塩田の副産物から化学原料をつくる会社として始まった。点滴（輸液）のノウハウからポカリスエットが生まれた。",s:["36:otsuka"]},
+   {n:"徳島ヴォルティス（サッカー）",d:"大塚製薬のサッカー部が元で、2005年に四国で初めてのJリーグクラブになった。",s:["36:vortis","36:pocari"]},
+  ]},
+  {c:"強豪校（野球・サッカー・バスケ・バレー・バド）",items:[
+   {n:"鳴門（野球）",d:"2025年夏の徳島大会決勝で鳴門渦潮に4-0で勝ち、3年ぶりの甲子園。甲子園では2回戦で優勝した沖縄尚学に負けた。",s:["36:hb25","36:hb25b"]},
+   {n:"阿南光（野球）",d:"2025年秋の県大会で優勝。",s:["36:hb25b"]},
+  ]},
+ ]},
+ {g:"旅・食・買う",cats:[
+  {c:"旅行",items:[
+   {n:"鳴門の渦潮",p:"36:uzushio",d:"鳴門海峡の大きな渦。観潮船や大鳴門橋の遊歩道から見られる。",s:["36:kanko"]},
+   {n:"祖谷のかずら橋・阿波おどり",d:"山あいのつり橋と、8月の徳島市の踊り。",s:["36:kanko"]},
+  ]},
+  {c:"ご当地グルメ",items:[
+   {n:"徳島ラーメン",p:"36:ramen",d:"茶色（しょうゆ豚骨）・黄色（鶏ガラ）・白（豚骨）の3系統。茶色系が人気。",s:["36:gourmet"]},
+   {n:"鳴門の鯛めし・阿波尾鶏",d:"鳴門海峡の鯛の炊き込みご飯と、県の地鶏。",s:["36:gourmet"]},
+  ]},
+  {c:"お土産",items:[
+   {n:"鳴門金時のお菓子・金長まんじゅう・すだち",d:"さつまいも「鳴門金時」の菓子、県民に長く愛されるおまんじゅう、すだち製品。",s:["36:gourmet"]},
+  ]},
+ ]}],
+ gaps:"確認できなかったもの：高校バドミントン（県総体のベスト4）、バドミントン実業団、有名選手、居酒屋（デート向き・飲み会向き）、お酒、カフェ、アパレル。"};
+})();
