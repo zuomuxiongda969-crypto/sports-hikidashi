@@ -1,0 +1,42 @@
+(()=>{
+Object.assign(S,{
+ "19:hb25":["高校野球ドットコム(2025年 山梨大会決勝)","https://www.hb-nippon.com/articles/6743"],
+ "19:stadium":["フットボールチャンネル(JITリサイクルインク スタジアム)","https://www.footballchannel.jp/2025/03/10/post686463/3/"],
+ "19:stadium2":["ニコニコ大百科 ヴァンフォーレ甲府","https://dic.nicovideo.jp/a/%E3%83%B4%E3%82%A1%E3%83%B3%E3%83%95%E3%82%A9%E3%83%BC%E3%83%AC%E7%94%B2%E5%BA%9C"],
+ "19:gourmet":["山梨県 地元の名物・人気のグルメ","https://www.pref.yamanashi.jp/miryoku/shoku/gourmet/index.html"],
+ "19:gourmet2":["All About 山梨のご当地グルメ","https://allabout.co.jp/gm/gc/431597/"],
+ "19:chateraise":["山梨県 企業ナビ シャトレーゼ","https://www.pref.yamanashi.jp/smartphone/rosei-koy/kigyo-navi/company/company-643.html"],
+ "19:chateraise2":["シャトレーゼ プレスリリース(会社概要)","https://origin.digitalpr.jp/pdf.php?r=122632"],
+});
+Object.assign(PHOTOS,{});
+Object.assign(PHOTOS,{"19:houtou": {"src": "img/p/19-houtou.jpg", "credit": "yoppy / CC BY 2.0", "page": "https://commons.wikimedia.org/wiki/File:Houtou_by_yoppy.jpg"}});
+DETAIL["19"]={name:"山梨",updated:"2026年11月24日",groups:[
+ {g:"スポーツ",cats:[
+  {c:"スポーツ施設",items:[
+   {n:"JIT リサイクルインク スタジアム（小瀬スポーツ公園）",d:"収容は15,853人。ヴァンフォーレ甲府のホーム。1985年開場で古くなり、屋根も少ないのが課題。2021年からパソコン用品メーカーのJITが名前をつけている（その前は山梨中銀スタジアム）。試合日は甲府駅からシャトルバスが出る。",s:["19:stadium","19:stadium2"]},
+  ]},
+  {c:"スポーツ企業・クラブ",items:[
+   {n:"ヴァンフォーレ甲府（サッカー）",d:"小瀬がホームのJリーグのクラブ。",s:["19:stadium"]},
+  ]},
+  {c:"バドミントン（高校のベスト4）",j:"バド高校",items:[]},
+  {c:"バドミントン（実業団）",j:"バド実業団",items:[]},
+  {c:"強豪校（野球・サッカー・バスケ・バレー・バド）",items:[
+   {n:"山梨学院（野球）",d:"2025年夏の山梨大会決勝で日本航空に4-3で逆転勝ち、3年ぶりの夏の甲子園。甲子園では聖光学院・京都国際などに勝ってベスト4。",s:["19:hb25"]},
+  ]},
+  {c:"スポーツの有名人",items:[]},
+ ]},
+ {g:"旅・食・買う",cats:[
+  {c:"お土産",items:[
+   {n:"信玄餅",d:"山梨の定番のお土産。きな粉をまぶした餅に黒蜜をかけて食べる。",s:["19:gourmet2"]},
+  ]},
+  {c:"ご当地グルメ",items:[
+   {n:"ほうとう",p:"19:houtou",d:"幅の広い麺を野菜や肉と味噌の汁で煮込む。武田信玄が戦の時の食事にしたという言い伝えがある。",s:["19:gourmet","19:gourmet2"]},
+   {n:"鳥もつ煮（甲府）",d:"砂肝・ハツ・レバー・きんかんを甘辛い醤油ダレで照り煮にする。県が「甲府の隠れ名物」と紹介している。",s:["19:gourmet"]},
+   {n:"吉田のうどん（富士吉田）",d:"コシがかなり強いうどん。",s:["19:gourmet2"]},
+  ]},
+  {c:"ご当地発祥の企業",items:[
+   {n:"シャトレーゼ（甲府市）",d:"1954年に甲府で焼き菓子店「甘太郎」として創業し、1967年に今の名前になった。本社工場も甲府。国内870店、海外7か国183店（2025年）。",s:["19:chateraise","19:chateraise2"]},
+  ]},
+ ]}],
+ gaps:"確認できなかったもの：山梨県の高校バドミントン（県総体のベスト4）、県内のバドミントン実業団、山梨出身の有名選手、ワイナリー数の出典、甲府駅周辺の居酒屋（デート向き・飲み会向き）、ラーメン、カフェ、旅行の定番、アパレル。"};
+})();

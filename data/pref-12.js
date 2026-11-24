@@ -19,6 +19,7 @@ Object.assign(S,{
  "12:shoyu":["ウォーカープラス(千葉のしょうゆ)","https://www.walkerplus.com/article/1188444/"],
 });
 Object.assign(PHOTOS,{});
+Object.assign(PHOTOS,{"12:lala": {"src": "img/p/12-lala.jpg", "credit": "Souka Kinmei / CC0", "page": "https://commons.wikimedia.org/wiki/File:LaLa_arena_TOKYO-BAY.jpg"}, "12:narita": {"src": "img/p/12-narita.jpg", "credit": "Charles Nadeau from San Mateo, CA / CC BY 2.0", "page": "https://commons.wikimedia.org/wiki/File:Naritasan_Shinsh%C5%8D-ji_Temple_(15254133392).jpg"}, "12:katsutan": {"src": "img/p/12-katsutan.jpg", "credit": "くろふね / CC BY 4.0", "page": "https://commons.wikimedia.org/wiki/File:%E5%8B%9D%E6%B5%A6%E3%82%BF%E3%83%B3%E3%82%BF%E3%83%B3%E3%83%A1%E3%83%B3%EF%BC%88%E5%BE%A1%E9%A3%9F%E4%BA%8B%E5%87%A6%E3%81%84%E3%81%97%E3%81%84%EF%BC%8920230211-P1022627.jpg"}, "12:takeoka": {"src": "img/p/12-takeoka.jpg", "credit": "くろふね / CC BY 4.0", "page": "https://commons.wikimedia.org/wiki/File:%E7%AB%B9%E5%B2%A1%E9%86%A4%E6%B2%B9%E3%83%A9%E3%83%BC%E3%83%A1%E3%83%B3%EF%BC%88%E4%B8%AD%E8%8F%AF%E3%81%9D%E3%81%B0%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%EF%BC%8920230717-P1028588.jpg"}});
 DETAIL["12"]={name:"千葉",updated:"2026年11月24日",groups:[
  {g:"スポーツ",cats:[
   {c:"スポーツ施設",items:[

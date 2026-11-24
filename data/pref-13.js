@@ -20,6 +20,7 @@ Object.assign(S,{
  "13:lambre2":["タイムアウト東京 銀座のカフェ","https://www.timeout.jp/tokyo/ja/restaurant/ginza-best-cafe"],
 });
 Object.assign(PHOTOS,{});
+Object.assign(PHOTOS,{"13:toyota": {"src": "img/p/13-toyota.jpg", "credit": "Syced / CC0", "page": "https://commons.wikimedia.org/wiki/File:Toyota_Arena_Tokyo_(31526).jpg"}, "13:national": {"src": "img/p/13-national.jpg", "credit": "Dick Thomas Johnson from Tokyo, Japan / CC BY 2.0", "page": "https://commons.wikimedia.org/wiki/File:Japan_National_Stadium_Tokyo_2020_Olympics_(51481561365).jpg"}, "13:asakusa": {"src": "img/p/13-asakusa.jpg", "credit": "そらみみ / CC BY-SA 3.0", "page": "https://commons.wikimedia.org/wiki/File:Kaminarimon_of_Sensoji_Temple_2.jpg"}, "13:monja": {"src": "img/p/13-monja.jpg", "credit": "t-mizo from Japan / CC BY 2.0", "page": "https://commons.wikimedia.org/wiki/File:Monjayaki_dish_from_Tsukishima,_Tokyo,_Japan;_January_2013.jpg"}});
 DETAIL["13"]={name:"東京",updated:"2026年11月24日",groups:[
  {g:"スポーツ",cats:[
   {c:"スポーツ施設",items:[

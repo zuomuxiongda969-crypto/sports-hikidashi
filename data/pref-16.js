@@ -1,0 +1,54 @@
+(()=>{
+Object.assign(S,{
+ "16:gym":["文部科学省 富山市総合体育館(Rコンセッション)資料","https://www.mext.go.jp/sports/content/20250325-spt_sposeisy-000041081_02.pdf"],
+ "16:hb25":["高校野球ドットコム(2025年 富山大会決勝)","https://www.hb-nippon.com/articles/6914"],
+ "16:hb26":["スポーツ報知(2026年 富山大会決勝)","https://www.excite.co.jp/news/article/SportsHochi_20260725_OHT1T51023/"],
+ "16:hachimura":["秋田魁新報/共同通信(八村塁 富山でのイベント)","https://www.sakigake.jp/news/article/20260822CO0070/"],
+ "16:hachimura2":["琉球新報(八村塁の生い立ち)","https://ryukyushimpo.jp/style/entry-948424.html"],
+ "16:ykk":["the社史 YKK","https://the-shashi.com/tse/ykk/chapter-1/"],
+ "16:ykk2":["富山労働局 YKK黒部事業所","https://jsite.mhlw.go.jp/toyama-roudoukyoku/content/contents/000906582.pdf"],
+ "16:fujikoshi":["イプロス 不二越","https://mono.ipros.com/company/detail/2044998"],
+ "16:gourmet":["なっぷ 富山のご当地グルメ","https://www.nap-camp.com/mag/8643"],
+ "16:gourmet2":["日本旅行 富山のグルメ","https://www.nta.co.jp/media/tripa/articles/szb8P"],
+ "16:daiki":["たびmag 西町大喜 西町本店","https://tabi-mag.jp/ty0269/"],
+ "16:black":["マイナビニュース 富山ブラック","https://news.mynavi.jp/article/20150322-toyamablack/"],
+});
+Object.assign(PHOTOS,{});
+Object.assign(PHOTOS,{"16:gym": {"src": "img/p/16-gym.jpg", "credit": "日の丸手内職者 / CC BY-SA 3.0", "page": "https://commons.wikimedia.org/wiki/File:Toyama-city-gymnasium.jpg"}, "16:masu": {"src": "img/p/16-masu.jpg", "credit": "Sougenma / CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:%E7%AC%B9%E3%81%94%E3%81%A8%E5%88%87%E3%81%A3%E3%81%9F%E3%81%BE%E3%81%99%E5%AF%BF%E3%81%97.JPG"}, "16:shiroebi": {"src": "img/p/16-shiroebi.jpg", "credit": "0840kenji at Japanese Wikipedia / CC BY-SA 3.0", "page": "https://commons.wikimedia.org/wiki/File:Shiroebi.jpg"}, "16:black": {"src": "img/p/16-black.jpg", "credit": "Totti / CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Toyama_Black_Daiki.jpg"}});
+DETAIL["16"]={name:"富山",updated:"2026年11月24日",groups:[
+ {g:"スポーツ",cats:[
+  {c:"スポーツ施設",items:[
+   {n:"富山市総合体育館",p:"16:gym",d:"客席5,035席（可動席2,280）。改修と運営をまとめて民間に任せる「Rコンセッション」という方式を、国内のスタジアム・アリーナで初めて取り入れた。富山グラウジーズのホーム。",s:["16:gym"]},
+  ]},
+  {c:"スポーツ企業・クラブ",items:[
+   {n:"富山グラウジーズ（バスケ）",d:"富山市総合体育館がホーム。2026-27シーズンから最上位のBプレミアに入る。",s:["16:gym"]},
+  ]},
+  {c:"バドミントン（高校のベスト4）",j:"バド高校",items:[]},
+  {c:"バドミントン（実業団）",j:"バド実業団",items:[]},
+  {c:"強豪校（野球・サッカー・バスケ・バレー・バド）",items:[
+   {n:"未来富山（野球）",d:"2025年夏の富山大会決勝で高岡商に13-7で勝ち、春夏通じて初の甲子園。",s:["16:hb25"]},
+   {n:"高岡商（野球）",d:"2025年は決勝で負けたが、2026年夏は決勝で富山第一に10-4で勝った。",s:["16:hb25","16:hb26"]},
+  ]},
+  {c:"スポーツの有名人",items:[
+   {n:"八村塁（バスケ・富山市）",d:"富山市生まれ。バスケは奥田中学校で始めた。2026年8月には地元でバスケ教室を開き「将来は富山グラウジーズでプレーしたい」と話した。馬場雄大は中学の先輩。",s:["16:hachimura","16:hachimura2"]},
+  ]},
+ ]},
+ {g:"旅・食・買う",cats:[
+  {c:"お土産",items:[
+   {n:"ます寿し",p:"16:masu",d:"笹を敷いた木の器に、酢飯とサクラマスを重ねた押し寿司。江戸時代に富山藩士が考えたとされる。富山市内だけで専門店が10軒以上あり、店ごとに味が違う。",s:["16:gourmet"]},
+   {n:"白えびのお菓子",d:"「富山湾の宝石」と呼ばれる白えびを使った煎餅やポテトチップス。",s:["16:gourmet"]},
+  ]},
+  {c:"ご当地グルメ",items:[
+   {n:"白えび",p:"16:shiroebi",d:"刺身や寿司、殻ごとの唐揚げ、白えび天丼で食べる。",s:["16:gourmet","16:gourmet2"]},
+   {n:"氷見うどん",d:"手延べのなめらかさとコシの強さがある。",s:["16:gourmet"]},
+  ]},
+  {c:"ラーメン",items:[
+   {n:"富山ブラック（西町大喜）",p:"16:black",d:"発祥は1947年創業の西町大喜。戦後、体を使って働く人の塩分補給のために醤油を濃くしたのが始まり。「富山ブラック」という名前は2000年前後にテレビで紹介されて広まった。かなりしょっぱいので覚悟して。富山駅の中（とやマルシェ）にも店がある。",s:["16:daiki","16:black"]},
+  ]},
+  {c:"ご当地発祥の企業",items:[
+   {n:"YKK（黒部市）",d:"創業は1934年の東京だが、創業者の吉田忠雄は魚津の出身。戦災後に郷里の魚津で再出発し、黒部が一大拠点になった。黒部事業所だけで約4,600人が働く（2015年時点）。ファスナーで世界一の会社。",s:["16:ykk","16:ykk2"]},
+   {n:"不二越（富山市）",d:"ベアリング・ロボット・工具などを作る機械メーカー。",s:["16:fujikoshi"]},
+  ]},
+ ]}],
+ gaps:"確認できなかったもの：富山県の高校バドミントン（県総体のベスト4）、県内のバドミントン実業団、カターレ富山の最近の成績、富山駅周辺の居酒屋（デート向き・飲み会向き）、お酒、カフェ、旅行の定番、アパレル。"};
+})();

@@ -18,6 +18,7 @@ Object.assign(S,{
  "14:100":["カナロコ(創業100周年の企業)","https://www.kanaloco.jp/news/economy/article-1139335.html"],
 });
 Object.assign(PHOTOS,{});
+Object.assign(PHOTOS,{"14:buntai": {"src": "img/p/14-buntai.jpg", "credit": "Aotomo39 / CC0", "page": "https://commons.wikimedia.org/wiki/File:%E6%96%87%E4%BD%93%E3%81%AE%E5%A4%96%E8%A6%B3.jpg"}, "14:yokosta": {"src": "img/p/14-yokosta.jpg", "credit": "Chme82 / CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Yokohama_Stadium.jpg"}, "14:sanma": {"src": "img/p/14-sanma.jpg", "credit": "RuinDig/Yuki Uchida / CC BY 4.0", "page": "https://commons.wikimedia.org/wiki/File:Sanmamen---2023-09-12_01.jpg"}, "14:chinatown": {"src": "img/p/14-chinatown.jpg", "credit": "Syced / CC0", "page": "https://commons.wikimedia.org/wiki/File:Yokohama_Chinatown_3.jpg"}});
 DETAIL["14"]={name:"神奈川",updated:"2026年11月24日",groups:[
  {g:"スポーツ",cats:[
   {c:"スポーツ施設",items:[

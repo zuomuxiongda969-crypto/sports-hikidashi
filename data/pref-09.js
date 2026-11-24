@@ -13,6 +13,7 @@ Object.assign(S,{
  "09:companies":["coki 栃木県の企業","https://coki.jp/article/column/57905/"],
 });
 Object.assign(PHOTOS,{});
+Object.assign(PHOTOS,{"09:nikko": {"src": "img/p/09-nikko.jpg", "credit": ". Ray in Manila / CC BY 2.0", "page": "https://commons.wikimedia.org/wiki/File:The_Three_Wise_Monkeys,_Nikk%C5%8D_T%C5%8Dsh%C5%8D-g%C5%AB;_April_2018.jpg"}, "09:gyoza": {"src": "img/p/09-gyoza.jpg", "credit": "Miyuki Meinaka / CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Gyoza_Street,_Utsunomiya,_April_2020.jpg"}, "09:sano": {"src": "img/p/09-sano.jpg", "credit": "Ocdp / CC0", "page": "https://commons.wikimedia.org/wiki/File:Sano_ramen_001.jpg"}, "09:arena": {"src": "img/p/09-arena.jpg", "credit": "Miyuki Meinaka / CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Nikkan_Arena_Tochigi_1.jpg"}});
 DETAIL["09"]={name:"栃木",updated:"2026年11月24日",groups:[
  {g:"スポーツ",cats:[
   {c:"スポーツ施設",items:[

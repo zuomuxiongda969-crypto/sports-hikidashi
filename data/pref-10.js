@@ -14,6 +14,7 @@ Object.assign(S,{
  "10:yamada":["coki 群馬県の企業","https://coki.jp/article/column/57735/"],
 });
 Object.assign(PHOTOS,{});
+Object.assign(PHOTOS,{"10:kusatsu": {"src": "img/p/10-kusatsu.jpg", "credit": "Aspere / CC0", "page": "https://commons.wikimedia.org/wiki/File:251129_Yubatake,_Kusatsu_07.jpg"}, "10:mizusawa": {"src": "img/p/10-mizusawa.jpg", "credit": "Tomo / CC BY 2.0", "page": "https://commons.wikimedia.org/wiki/File:Mizusawa_Udon,_Shimizuya,_Ikaho_-_Aug_30,_2009.jpg"}});
 DETAIL["10"]={name:"群馬",updated:"2026年11月24日",groups:[
  {g:"スポーツ",cats:[
   {c:"スポーツ施設",items:[

@@ -16,6 +16,7 @@ Object.assign(S,{
  "11:listed":["上場企業図鑑 埼玉県編","https://official.gfs.tokyo/blog/?p=27184"],
 });
 Object.assign(PHOTOS,{});
+Object.assign(PHOTOS,{"11:saisuta": {"src": "img/p/11-saisuta.jpg", "credit": "江戸村のとくぞう / CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Saitama_Stadium_200113b23.jpg"}, "11:kawagoe": {"src": "img/p/11-kawagoe.jpg", "credit": "Zairon / CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Kawagoe_Toki_no_Kane_1.jpg"}});
 DETAIL["11"]={name:"埼玉",updated:"2026年11月24日",groups:[
  {g:"スポーツ",cats:[
   {c:"スポーツ施設",items:[
