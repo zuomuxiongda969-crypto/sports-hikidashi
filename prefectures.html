@@ -11,7 +11,8 @@
 <style>
 /* Layout: コートのライン図を思わせる帯ヘッダー → 絞り込みバー(sticky) → 地方ごとの県カード格子 */
 :root{
-  --bg:#f3f6f4; --surface:#ffffff; --fg:#14231d; --muted:#5b6d65; --line:#d3ddd8;
+  color-scheme:light;
+  --bg:#ffffff; --surface:#ffffff; --fg:#14231d; --muted:#5b6d65; --line:#d3ddd8;
   --court:#13664f; --court-ink:#ffffff; --shuttle:#e8a317;
   --t-work:#13664f; --t-opt:#3d63b8; --t-sns:#c2410c; --t-bad:#8a5a00;
   --chip-bg:#e6eeea;
@@ -19,16 +20,6 @@
   --f-body:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP",system-ui,sans-serif;
   --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#0e1714; --surface:#16221d; --fg:#e4ede8; --muted:#94a89e; --line:#2a3a33;
-  --court:#1d7a5f; --court-ink:#f1fbf6; --shuttle:#f0b534;
-  --t-work:#4fc49b; --t-opt:#8aa8ef; --t-sns:#f08a5d; --t-bad:#e0b252;
-  --chip-bg:#1f2e28; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#0e1714; --surface:#16221d; --fg:#e4ede8; --muted:#94a89e; --line:#2a3a33;
-  --court:#1d7a5f; --court-ink:#f1fbf6; --shuttle:#f0b534;
-  --t-work:#4fc49b; --t-opt:#8aa8ef; --t-sns:#f08a5d; --t-bad:#e0b252;
-  --chip-bg:#1f2e28; color-scheme:dark}
 *{box-sizing:border-box}
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.7}
