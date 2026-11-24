@@ -523,6 +523,7 @@ function renderDetail(code){
   D.groups.forEach((g,gi)=>{
     let cats="";
     g.cats.forEach((c,ci)=>{
+      if(!c.items.length) return;
       const id=`c${gi}-${ci}`;
       jump+=`<a href="#pref-${code}" data-jump="${id}">${esc(c.j||c.c.replace(/（.*）/,""))}</a>`;
       cats+=`<div class="d-cat" id="${id}"><h3>${iconFor(c.c)}${esc(c.c)}</h3>${c.items.map(it=>`<div class="d-item"><b>${esc(it.n)}</b>${it.p?photo(it.p):""}<p>${esc(it.d)}</p>${it.t?`<p class="talk">話のネタ：${esc(it.t)}</p>`:""}<p class="src">出典：${it.s.map(src).join("、")}</p></div>`).join("")}</div>`;
@@ -534,8 +535,16 @@ function renderDetail(code){
    <p class="d-meta">すべて出典つき（${D.updated} ウェブで確認）</p>
    <div class="d-jump">${jump}</div>${body}<p class="d-gap">${esc(D.gaps)}</p>`;
 }
+// 宮城以外の県は data/pref-XX.js に分けて、開いたときだけ読み込む
+const AVAIL=["01", "02", "03"];
+const hasDetail=c=>!!DETAIL[c]||AVAIL.includes(c);
+const loading={};
+function loadPref(c){
+  return loading[c]||(loading[c]=new Promise((ok,ng)=>{const s=document.createElement("script");s.src=`data/pref-${c}.js`;s.onload=ok;s.onerror=ng;document.head.appendChild(s)}));
+}
 function route(){
   const m=location.hash.match(/^#pref-(\d\d)$/);
+  if(m&&!DETAIL[m[1]]&&AVAIL.includes(m[1])){loadPref(m[1]).then(route,()=>{});return}
   const on=m&&DETAIL[m[1]];
   document.getElementById("detail").hidden=!on;
   document.querySelector("main").hidden=!!on;
@@ -569,7 +578,7 @@ function render(){
       });
       if(!shown.length)continue;
       total+=shown.length;
-      rh+=`<article class="pref"><div class="pref-head"><span class="code">${code}</span>${DETAIL[code]?`<a class="pname plink" href="#pref-${code}">${pname} <span aria-hidden="true">›</span></a>`:`<span class="pname">${pname}</span>`}</div>`;
+      rh+=`<article class="pref"><div class="pref-head"><span class="code">${code}</span>${hasDetail(code)?`<a class="pname plink" href="#pref-${code}">${pname} <span aria-hidden="true">›</span></a>`:`<span class="pname">${pname}</span>`}</div>`;
       for(const it of shown){
         const id=code+":"+it.n;
         const q=encodeURIComponent(it.n+" "+pname);
