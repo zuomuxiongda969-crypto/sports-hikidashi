@@ -535,6 +535,20 @@ function renderDetail(code){
    <p class="d-meta">すべて出典つき（${D.updated} ウェブで確認）</p>
    <div class="d-jump">${jump}</div>${body}<p class="d-gap">${esc(D.gaps)}</p>`;
 }
+// 県の項目をあとから足す（宮城と同じ並び順にそろえる）
+const CAT_ORDER=["スポーツ施設","スポーツ企業","バドミントン（高校","バドミントン（実業団","強豪校","有名","旅行","お土産","ご当地グルメ","お酒","居酒屋（デート","居酒屋（会社","居酒屋（横丁","ランチ","ラーメン","カフェ","発祥","アパレル"];
+const catIdx=c=>{const i=CAT_ORDER.findIndex(k=>c.includes(k));return i<0?99:i};
+function addMore(code,m){
+  Object.assign(S,m.S||{});Object.assign(PHOTOS,m.PHOTOS||{});
+  const D=DETAIL[code];if(!D)return;
+  (m.cats||[]).forEach(x=>{
+    let g=D.groups.find(y=>y.g===x.g);if(!g){g={g:x.g,cats:[]};D.groups.push(g)}
+    const c=g.cats.find(y=>y.c===x.c);
+    if(c)c.items.push(...x.items);else g.cats.push({c:x.c,j:x.j,items:x.items});
+  });
+  D.groups.forEach(g=>g.cats.sort((a,b)=>catIdx(a.c)-catIdx(b.c)));
+  if(m.gaps)D.gaps=m.gaps;if(m.updated)D.updated=m.updated;
+}
 // 宮城以外の県は data/pref-XX.js に分けて、開いたときだけ読み込む
 const AVAIL=["01", "02", "03", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47"];
 const hasDetail=c=>!!DETAIL[c]||AVAIL.includes(c);
