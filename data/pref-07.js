@@ -75,4 +75,23 @@ DETAIL["07"]={name:"福島",updated:"2026年11月24日",groups:[
  ]},
 ],
 gaps:"確認できなかったもの：福島県高校総体バドミントンの団体の上位校、福島県のバドミントン実業団チーム、サッカー・バスケ・バレーの強豪校、福島ファイヤーボンズの新アリーナの計画、福島の老舗喫茶店、福島発のアパレルブランド。居酒屋の情報はおもに予約サイトの店舗紹介によるもの。お店の営業時間や定休日は変わるので、行く前に確認してください。"};
+addMore("07",{updated:"2026-11-27",
+S:{
+ "07:takino":["会津若松 田季野","https://aizu.com/org/aizu/takino/index.html"],
+ "07:takino2":["TRAVEL BOOK 会津若松のランチ","https://www.travelbook.co.jp/t-253/topic-17285/"]
+},
+cats:[
+ {g:"旅・食・買う",c:"ランチ",items:[
+  {n:"輪箱飯（わっぱめし）の田季野（会津若松市栄町）",d:"檜枝岐村で500年続く曲げわっぱに、会津米と旬の具をつめて蒸し上げる。築100年以上の古民家の店。",s:["07:takino","07:takino2"]},
+ ]},
+]});
+
+addMore("07",{S:{
+ "07:inawashiro":["HIS 福島の観光スポット","https://article.his-j.com/kokunai/tohoku/fukushima/post-16195/"],
+ "07:goshiki":["ANA 裏磐梯・五色沼","https://www.ana.co.jp/ja/us/japan-travel-planner/fukushima/0000001.html"],
+ "07:skyline":["福島市 磐梯吾妻スカイライン","https://www2.t-expo.jp/exhibitors/downloadPdf/47397/keshiki.pdf"]},
+cats:[{g:"旅・食・買う",c:"旅行",items:[
+  {n:"猪苗代湖・五色沼（裏磐梯）",d:"猪苗代湖は日本で3番目に大きい淡水湖。五色沼は約4kmの散策路で、ミネラルの違いで沼ごとに水の色が変わる。",s:["07:inawashiro","07:goshiki"]},
+  {n:"磐梯吾妻スカイライン",d:"全長約29km、一番高いところは標高1,622mの山の道。「日本の道100選」。冬は通れない。",s:["07:skyline"]},
+]}]});
 })();
