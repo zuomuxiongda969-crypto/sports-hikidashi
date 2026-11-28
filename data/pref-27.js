@@ -95,4 +95,98 @@ cats:[
   {n:"太陽の塔（万博記念公園・吹田市）",d:"岡本太郎がつくった大阪万博のシンボル。2018年から内部を公開していて、生命の進化を表す「生命の樹」が見られる（予約優先）。",s:["27:taiyo"]},
  ]},
 ],gaps:"確認できなかったもの：大阪府高校総体バドミントンの上位校の最新の結果、パリ2024の大阪ゆかりのメダリストの名前（府の名簿はPDF）、居酒屋（デート・飲み会向き）、ランチの名店、アパレルブランド。お店の営業時間や定休日は変わるので、行く前に確認してください。"});
+addMore("27",{updated:"2026-11-27",S:{
+ "27:evessa":["箕面市 大阪エヴェッサ","https://www.city.minoh.lg.jp/sports/sports_promotion/osakaevessa.html"],
+ "27:tricky":["バボラ トリッキーパンダース","https://www.babolat.com/jp/heroes-players-blog-tricky-pandars/tricky-pandars.html"],
+ "27:toin":["デイリースポーツ 大阪桐蔭、春夏連覇","https://www.daily.co.jp/baseball/2018/08/22/0011565308.shtml"],
+ "27:riseisha":["Number 履正社が初優勝","https://number.bunshun.jp/articles/-/840483"],
+ "27:kinrankai":["Number 金蘭会が春高連覇","https://number.bunshun.jp/articles/-/833175"],
+ "27:kinrankai2":["web Sportiva 春高バレー 金蘭会を優勝に導いた馬場","https://sportiva.shueisha.co.jp/clm/otherballgame/volleyball/2026/01/21/post_4/"],
+ "27:darvish":["デイリースポーツ 羽曳野市出身のダルビッシュ有","https://www.daily.co.jp/mlb/2026/01/09/0019896183.shtml"],
+ "27:naomi":["デイリースポーツ 大阪生まれの大坂なおみ","https://www.daily.co.jp/general/2019/09/18/0012712367.shtml"],
+ "27:rikuro":["ウォーカープラス りくろーおじさんの店","https://www.walkerplus.com/article/1055076/"],
+ "27:rikuro2":["星野リゾート みちくさガイド りくろーおじさんのチーズケーキ","https://hoshinoresorts.com/jp/guide/area/kinki/osaka/osaka-osaka/rikuro/"],
+ "27:daimon":["大阪観光局 大門酒造","https://osaka-info.jp/special/dc/event/detail141/"],
+ "27:katano":["京阪電車 山野酒造 片野桜","https://www.keihan.co.jp/navi/famous/famous59.html"],
+ "27:t9":["食べログまとめ 梅田で居酒屋デート","https://tabelog.com/matome/9373/"],
+ "27:uoichi":["楽天ぐるなび 魚一 梅田店","https://r.gnavi.co.jp/keds704/"],
+ "27:okageya":["楽天ぐるなび おかげ家 梅田店","https://r.gnavi.co.jp/ke3x100/"],
+ "27:yuzu":["ホットペッパー 居酒屋 ゆずの小町 梅田店","https://www.hotpepper.jp/strJ000981095/"],
+ "27:shinpuku":["ホットペッパー ふぐかに処 心福","https://www.hotpepper.jp/strJ001225753/"],
+ "27:janjan":["観光庁 多言語解説文 ジャンジャン横丁","https://www.mlit.go.jp/tagengo-db/R4-00630.html"],
+ "27:jiyuken":["GOOD LUCK TRIP 自由軒 難波本店","https://www.gltjp.com/ja/directory/item/13233/"],
+ "27:hokkyoku":["るるぶ&more 北極星が100周年","https://rurubu.jp/andmore/article/16048"],
+ "27:hokkyoku2":["GOOD LUCK TRIP 北極星 心斎橋本店","https://www.gltjp.com/ja/directory/item/15289"],
+ "27:jinrui":["ベルトラYOKKA 西中島南方のラーメン店","https://www.veltra.com/jp/yokka/article/nishinakajima-minamigata-ramen-shops/"],
+ "27:jinrui2":["食べログまとめ 新大阪駅周辺のラーメン","https://tabelog.com/matome/8027/"],
+ "27:kamukura":["valuepress 7月19日はおいしいラーメン神座の日","https://www.value-press.com/pressrelease/204080"],
+ "27:american":["京阪 K PRESS 純喫茶アメリカン","https://www.keihan.co.jp/k-press/feature/202310-toku1.php"],
+ "27:madura":["ウォーカープラス 喫茶マヅラ","https://www.walkerplus.com/article/125777/"],
+ "27:nissin":["THE社史 日清食品 中交総社からチキンラーメンまで","https://the-shashi.com/tse/2897/chapter-1/"],
+ "27:suntory":["THE社史 サントリー 鳥井商店創業","https://the-shashi.com/tse/suntory/chapter-1/"],
+ "27:sharp":["THE社史 早川徳次（シャープ）","https://the-shashi.com/tse/6753/executives/ceo/hayakawa-tokuji/"],
+ "27:towel":["ふるさと納税 泉州タオル（泉佐野市）","https://www.furusato-tax.jp/product/detail/27213/5047478"],
+ "27:chusen":["大阪府 浪華本染め・手拭い","https://www.pref.osaka.lg.jp/mono/dento/dento17.html"],
+ "27:chusen2":["堺市 浪華本染め（注染）","https://www.city.sakai.lg.jp/kanko/sakai/keisho/dentosangyo/yukata_tenugui.html"],
+ "27:nijiyura":["京阪電車 注染てぬぐい にじゆら","https://www.keihan.co.jp/navi/famous/famous214.html"]},
+cats:[
+ {g:"スポーツ",c:"スポーツ企業・クラブ",items:[
+  {n:"大阪エヴェッサ（バスケ）",d:"大阪府で唯一のBリーグのクラブ。ホームはおおきにアリーナ舞洲。",s:["27:evessa"]},
+ ]},
+ {g:"スポーツ",c:"バドミントン（実業団）",items:[
+  {n:"トリッキーパンダース（大阪）",d:"NTT西日本のバド部がなくなった後、2003年に元選手の渡邉哲義さんが作ったチーム（実業団ではなく非営利団体）。2022年にS/Jリーグのトップリーグへ戻った。",s:["27:tricky"]},
+ ]},
+ {g:"スポーツ",c:"強豪校（野球・サッカー・バスケ・バレー・バド）",items:[
+  {n:"大阪桐蔭（野球）",d:"2018年夏の甲子園決勝で金足農に勝ち、史上初の2度目の春夏連覇。",s:["27:toin"]},
+  {n:"履正社（野球）",d:"2019年夏の甲子園で星稜に勝ち、初優勝。",s:["27:riseisha"]},
+  {n:"金蘭会（女子バレー）",d:"春高バレーで2大会連続優勝（決勝で東九州龍谷にフルセット勝ち）。2026年1月の春高でも優勝。",s:["27:kinrankai","27:kinrankai2"]},
+ ]},
+ {g:"スポーツ",c:"スポーツの有名人",items:[
+  {n:"ダルビッシュ有（野球）",d:"大阪府羽曳野市出身。メジャーリーグで活躍する投手。",s:["27:darvish"]},
+  {n:"大坂なおみ（テニス）",d:"大阪生まれ。",s:["27:naomi"]},
+ ]},
+ {g:"旅・食・買う",c:"お土産",items:[
+  {n:"りくろーおじさんのチーズケーキ",d:"なんばの本店などで売られる焼きたてチーズケーキ。1956年創業の店で、2号店の北加賀屋店の目玉商品として始まった。",s:["27:rikuro","27:rikuro2"]},
+ ]},
+ {g:"旅・食・買う",c:"お酒",items:[
+  {n:"大門酒造（交野市）",d:"江戸時代末期から続く交野の酒蔵。生駒山系の伏流水で仕込む。",s:["27:daimon"]},
+  {n:"片野桜（山野酒造・交野市）",d:"江戸時代末期に交野で創業した酒蔵の銘柄。全国新酒鑑評会で金賞をとっている。",s:["27:katano"]},
+ ]},
+ {g:"旅・食・買う",c:"居酒屋（デート向き）",j:"居酒屋・デート",items:[
+  {n:"瓦そば すずめ（東梅田）",d:"山口名物の瓦そばと、えりすぐりの地酒がそろう居酒屋。",s:["27:t9"]},
+  {n:"はまぐり庵 -吉祥別邸-（阪急三番街）",d:"はまぐり料理の店。個室があり、二人でゆっくりできる。",s:["27:t9"]},
+  {n:"串焼屋ウナチッタ（お初天神）",d:"串焼きとワインの店。名物は月見つくね。少し暗めのおしゃれな内装。",s:["27:t9"]},
+ ]},
+ {g:"旅・食・買う",c:"居酒屋（会社の飲み会向き）",j:"居酒屋・飲み会",items:[
+  {n:"魚一 梅田店（東通り）",d:"完全個室で2名から最大100名まで。全コース飲み放題付き。",s:["27:uoichi"]},
+  {n:"炭火焼dining おかげ家 梅田店（茶屋町）",d:"フロア貸切で最大50名。最大20名のお座敷の半個室もある。",s:["27:okageya"]},
+  {n:"居酒屋 ゆずの小町 梅田店",d:"全席完全個室で、最大70名まで人数に合わせた個室に入れる。",s:["27:yuzu"]},
+  {n:"ふぐかに処 心福（鶴橋）",d:"最大50名まで個室で宴会ができる、ふぐ・かに・鱧の店。",s:["27:shinpuku"]},
+ ]},
+ {g:"旅・食・買う",c:"居酒屋（横丁・老舗）",j:"居酒屋・横丁",items:[
+  {n:"ジャンジャン横丁（新世界）",d:"1921年にできた横丁。名前は客を呼び込む三味線の音から。串カツの店が並ぶ。",s:["27:janjan"]},
+ ]},
+ {g:"旅・食・買う",c:"ランチ",items:[
+  {n:"自由軒 難波本店",d:"1910年創業の大阪初の西洋料理店。ご飯とルウを混ぜて出す「名物カレー」は織田作之助も愛した。",s:["27:jiyuken"]},
+  {n:"北極星 心斎橋本店",d:"1922年創業。オムライス発祥の店として知られる。1950年に建てた数寄屋造りの店で庭を見ながら食べられる。",s:["27:hokkyoku","27:hokkyoku2"]},
+ ]},
+ {g:"旅・食・買う",c:"ラーメン",items:[
+  {n:"人類みな麺類（西中島南方）",d:"開店前から行列ができる醤油ラーメンの人気店。看板は「らーめん原点」。",s:["27:jinrui","27:jinrui2"]},
+  {n:"どうとんぼり神座 道頓堀店",d:"1986年に4坪9席で始まった神座の1号店。白菜と豚バラ入りの「おいしいラーメン」。",s:["27:kamukura"]},
+ ]},
+ {g:"旅・食・買う",c:"カフェ",items:[
+  {n:"純喫茶アメリカン（道頓堀）",d:"1946年創業。1・2階で245席の広い店。ホットケーキなど昔ながらの喫茶メニュー。",s:["27:american"]},
+  {n:"喫茶マヅラ（大阪駅前第1ビル）",d:"1970年開業。オーナーがガガーリンに感動して作った宇宙がテーマの店内。",s:["27:madura"]},
+ ]},
+ {g:"旅・食・買う",c:"ご当地発祥の企業",items:[
+  {n:"日清食品",d:"1948年に安藤百福が大阪府泉大津市で会社を作り、1958年にチキンラーメンを開発。",s:["27:nissin"]},
+  {n:"サントリー",d:"1899年、鳥井信治郎が大阪市西区靭で鳥井商店を開いたのが始まり。",s:["27:suntory"]},
+  {n:"シャープ",d:"東京で創業。関東大震災の後、1924年に大阪市阿倍野区で再出発し、ラジオを作り始めた。",s:["27:sharp"]},
+ ]},
+ {g:"旅・食・買う",c:"アパレル・ブランド",items:[
+  {n:"泉州タオル（泉佐野市）",d:"日本のタオル産業発祥の地で作られるタオル。織った後にさらす「後晒し」で吸水性がよい。",s:["27:towel"]},
+  {n:"浪華本染め（注染）",d:"明治20年ごろ大阪で生まれた手ぬぐいの染め方。江戸時代の大阪は河内・和泉の木綿で手拭いの大産地だった。",s:["27:chusen","27:chusen2"]},
+  {n:"注染てぬぐい にじゆら（堺市）",d:"堺市発の手ぬぐいブランド。注染の技法で染めている。",s:["27:nijiyura"]},
+ ]},
+],gaps:"確認できなかったもの：大阪府高校総体バドミントンの上位校の最新の結果（四天王寺のみ）、トリッキーパンダース以外のバドのチーム、樋口黎さん（パリ五輪レスリング金）など大阪ゆかりの選手の出身地（府の名簿は読めず）、強豪校の5校目。お店の営業時間や定休日は変わるので、行く前に確認してください。"});
 })();
